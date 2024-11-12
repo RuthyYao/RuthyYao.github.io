@@ -1,1 +1,28 @@
+---
+layout: post
+title: Enhancing Targeting Accuracy Using ML
+image: "/posts/foodie-fi.png"
+tags: [Customer Acquisition and Retention, Product Performance, Exploratory Analysis, SQL]
+---
+
+Foodie Fi, a streaming service provider, wants to utilise data-driven analysis to inform the investment decisions on products and customers to drive business growth!
+
+# Table of contents
+
+- [00. Project Overview](#overview-main)
+    - [Business Problem](#overview-business-problem)
+    - [Actions](#overview-actions)
+    - [Results](#overview-results)
+    - [Growth/Next Steps](#overview-growth)
+- [01. Data Overview](#data-overview)
+- [02. Exploratory Analysis](#exploratory-analysis)
+- [03. Results & Application](#results-application)
+- [04. Growth & Next Steps](#growth-next-steps)
+
+___
+
+# Project Overview  <a name="overview-main"></a>
+
+### Business Problem <a name="overview-business-problem"></a>
+Foodie Fi started the vedio streaming service that only had food related content a year ago. They sell monthly and annual sbuscription plans, giving their customer unlimited on-demand access to exclusively food related vedios from around the world. The management team wants to review the product performance and would like to rely on data to inform their future investment decisions on new product features, customer acquisition and retention and other business growth strategies.
 
