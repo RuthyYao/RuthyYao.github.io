@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Customer Acquistion and Monetization Analysis
-image: "/posts/foodie-fi.png"
+image: "/posts/foodie-fi-c.png"
 tags: [Customer Acquisition and Retention, Product Performance, Exploratory Analysis, SQL]
 ---
 
