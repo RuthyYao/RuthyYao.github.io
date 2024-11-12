@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Enhancing Targeting Accuracy Using ML
+title: Customer Acquistion and Monetization Analysis
 image: "/posts/foodie-fi.png"
 tags: [Customer Acquisition and Retention, Product Performance, Exploratory Analysis, SQL]
 ---
