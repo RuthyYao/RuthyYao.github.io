@@ -41,5 +41,5 @@ On top of that, I also created a payment table that allows the business to work 
 <br>
 
 ### Results <a name="overview-results"></a>
-The data shows that 
+Foodie Fi has 1000 customers. They acquried 80 new customers each month on average. In 2021, there were 123 customers upgrade to the the pro plan (paid premium plans) and 71 customers churned. Foodie Fi's customer churn rate is 30.7%. Data shows that after the trial, 55% of the customers upgrade to the basic monthly plan, 32.5% of the customers subscribed the pro monthly plan, 3.7% of the customers upgraded to the pro annual plan straightaway and 9.2% of the customers churned. 
 
