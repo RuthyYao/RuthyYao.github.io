@@ -80,4 +80,6 @@ Table 2: subscriptions (example)
 | 2 | 3 | 2020-09-27 |
 
 Entity Relationship Diagram:
+<br>
 image: "/posts/foodie-fi-erd.png"
+<img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png" >
