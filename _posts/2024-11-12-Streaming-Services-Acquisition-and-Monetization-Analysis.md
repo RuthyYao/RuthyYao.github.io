@@ -2,7 +2,7 @@
 layout: post
 title: Customer Acquisition and Monetization Analysis
 image: "/posts/foodie-fi.png"
-tags: [Customer Acquisition and Retention, Product Performance, Exploratory Analysis, SQL]
+tags: [Customer Acquisition and Retention, Exploratory Analysis, SQL]
 ---
 
 Foodie Fi, a streaming service provider, wants to utilise data-driven analysis to inform the investment decisions on products and customers to drive business growth!
