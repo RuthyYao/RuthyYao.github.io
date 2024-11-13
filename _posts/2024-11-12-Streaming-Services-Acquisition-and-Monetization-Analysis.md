@@ -223,6 +223,11 @@ LEFT JOIN plans
 |-------------|------------------|
 | 307         | 30.7             |
 
+
+| churn_count | churn_percentage |
+|-------------|------------------|
+| 307         | 30.7             |
+
 ---
 ### 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
 ```TSQL
