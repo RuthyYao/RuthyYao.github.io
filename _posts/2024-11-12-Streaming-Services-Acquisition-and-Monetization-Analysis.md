@@ -566,3 +566,19 @@ from mth_rev;
 | 11     | 12862.70 | -14.2           |
 | 12     | 13429.50 | 4.3             |
 
+# Results  <a name="results"></a>
+Foodie Fi have acquired 1000 customers since the business started with c.80 new customers each month. Of the total 1000 customers, 307 customers has churned - churn rate 30.7%.  Data shows that after the trial, 55% of the customers upgrade to the basic monthly plan, 32.5% of the customers subscribed the pro monthly plan, 3.7% of the customers upgraded to the pro annual plan straightaway and 9.2% of the customers churned. It took averagely 105 days from trial to upgrade to a pro plan (paid premium plans). In 2021, there were 123 customers upgraded to a pro plan.  
+<br>
+
+# Applications <a name="applications"></a>
+To support the management team to monitor the business performance ongoingly, I would leverage the data insights to build a dahsboard that allows us to track the key metrics over time. Specifically, I would call out the following KPIs:
+* **Monthly Revenue Growth** - how does the business grow their revenue monty-over-month.
+* **Total subscribers** - how many customers the business has in total at a point. This reflects the reach and popularity of Foodie Fi.
+* **The customer growth** - how customers increase month-over-month. THis reveals the momentum of the expansion of their customer base.
+* **Conversion rate** - how many customers stay in Foodie Fi after the trial. Howe does the rate look like.
+* **Churn rate** - how many customers cancel their plan each month?  This signals customer dissatisfaction and can help pinpoint areas for improvements in suer expereince, pricing or content library etc.
+<br>
+
+# Growth/Next Steps <a name="growth"></a>
+* **Improve the customer retention** - Further analysis on customers engagement for the customer cohort who upgrade their plan, those who downgrade from pro to basic plans, and those who cancel their subscriptions to yield additional insights on on how to improve customer retentions.
+* **Reduce the customer churn rate** - Leverage the data insights to design an exit survey to customers who wish to cancel thier subscriptions. This could help Foodie Fi to identify the common reasons for their cancellation and take measures to reduce the customer churn. We could monitor the churn rate and convertion rate to validate the effectiveness of those measures.
