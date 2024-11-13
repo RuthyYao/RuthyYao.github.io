@@ -55,3 +55,33 @@ To support the management team to monitor the business performance ongoingly, I 
 ### Growth/Next Steps <a name="overview-growth"></a>
 * **Improve the customer retention** - Further analysis on customers engagement for the customer cohort who upgrade their plan, those who downgrade from pro to basic plans, and those who cancel their subscriptions to yield additional insights on on how to improve customer retentions.
 * **Reduce the customer churn rate** - Leverage the data insights to design an exit survey to customers who wish to cancel thier subscriptions. This could help Foodie Fi to identify the common reasons for their cancellation and take measures to reduce the customer churn. We could monitor the churn rate and convertion rate to validate the effectiveness of those measures.
+
+# Data Overview  <a name="data-overview"></a>
+The original dataset has two data tables. 
+
+Table 1: plans
+<br>
+| **plan_id** | **plan_name** | **price** |
+|---|---|---|
+| 0 | trial | 0 |
+| 1 | basic monthly | 9.90 |
+| 2 | pro monthly | 19.90 |
+| 3 | pro annual | 199 |
+| 4 | churn | null |
+
+<br>
+Table 2: subscriptions
+<br>
+| **customer_id** | **plan_id** | **start_date** |
+|---|---|---|
+| 1 | 0 | 2020-08-01 |
+| 1 | 1 | 2020-08-08 |
+| 2 | 0 | 2020-09-20 |
+| 2 | 3 | 2020-09-27 |
+
+<br>
+| **Variable Name** | **Variable Type** |
+|---|---|
+| customer_id | int |
+| plan_id | int |
+| start_date | date |
