@@ -600,5 +600,7 @@ To support the management team to monitor the business performance ongoingly, I 
 # Growth/Next Steps <a name="growth-next-steps"></a>
 * **Improve the customer retention** - Further analysis on customers engagement for the customer cohort who upgrade their plan, those who downgrade from pro to basic plans, and those who cancel their subscriptions to yield additional insights on on how to improve customer retentions.
 * **Reduce the customer churn rate** - Leverage the data insights to design an exit survey to customers who wish to cancel thier subscriptions. This could help Foodie Fi to identify the common reasons for their cancellation and take measures to reduce the customer churn. We could monitor the churn rate and convertion rate to validate the effectiveness of those measures.
----
+  
+<br>
+
 Note: This project comes from [#8WeekSQLChallenge](https://8weeksqlchallenge.com/)
