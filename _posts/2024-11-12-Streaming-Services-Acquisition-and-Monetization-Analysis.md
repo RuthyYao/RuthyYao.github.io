@@ -84,11 +84,16 @@ Entity Relationship Diagram:
 
 <img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png">
 
+<br>
+![alt text](/img/posts/foodie-fi-erd.png "Entity Relationship Diagram")
+
+<br>
 We need to use the plan_id as the join key to join the two tables. 
 
 <br>
-<br>
+
 # Exploratory Analysis  <a name="exploratory-analysis"></a>
+
 ## Customer Onboarding Journey 
 ```TSQL
 SELECT 
