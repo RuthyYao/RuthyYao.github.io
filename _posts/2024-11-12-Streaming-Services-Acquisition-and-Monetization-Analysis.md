@@ -147,10 +147,6 @@ WHERE customer_id IN (1, 2, 11, 13, 15, 16, 18, 19);
 SELECT COUNT(DISTINCT customer_id) AS total_customers
 FROM subscriptions;
 ```
-| total_customers |
-|-----------------|
-| 1000            |
-
 
 | total_customers |
 |-----------------|
@@ -360,10 +356,6 @@ FROM AnnualPlan
 JOIN JoinDate
 WHERE AnnualPlan.customer_id = JoinDate.customer_id;
 ```
-| avg_days_to_annual |
-|--------------------|
-| 105                |
-
 
 | avg_days_to_annual |
 |--------------------|
@@ -577,21 +569,6 @@ SELECT
     ROUND((revenue/LAG(revenue) OVER(ORDER BY month) - 1)*100,1) AS rev_growth_rate
 from mth_rev;
 ```
-| month | revenue  | rev_growth_rate |
-|-------|----------|-----------------|
-| 1     | 1282.00  | NULL            |
-| 2     | 2792.60  | 117.8           |
-| 3     | 4342.40  | 50.5            |
-| 4     | 5972.70  | 39.3            |
-| 5     | 7324.10  | 22.2            |
-| 6     | 8765.50  | 19.0            |
-| 7     | 10207.50 | 16.9            |
-| 8     | 12047.40 | 18.8            |
-| 9     | 12913.20 | 7.3             |
-| 10    | 14952.50 | 15.1            |
-| 11    | 12862.70 | -14.2           |
-| 12    | 13429.50 | 4.3             |
-
 
 | month | revenue  | rev_growth_rate |
 |-------|----------|-----------------|
