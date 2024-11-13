@@ -204,7 +204,7 @@ ORDER BY subscriptions.plan_id;
 | 3      | pro annual    | 63          |
 | 4      | churn         | 71          | 
 
-
+<br>
 
 | plan_id | plan_name     | subs_count |
 |---------|---------------|------------|
