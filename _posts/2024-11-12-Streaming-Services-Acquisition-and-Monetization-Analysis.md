@@ -607,4 +607,4 @@ To support the management team to monitor the business performance ongoingly, I 
   
 <br>
 
-Note: This project comes from [#8WeekSQLChallenge](https://8weeksqlchallenge.com/)
+Note: This project comes from [#8WeekSQLChallenge-CaseStudy#3](https://8weeksqlchallenge.com/case-study-3/)
