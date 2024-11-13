@@ -301,14 +301,6 @@ WHERE next_plan IS NULL
 GROUP BY plan_id, current_plan
 ORDER BY plan_id;
 ```
-| plan_id | plan_name     | customer_count | percentage |
-|---------|---------------|----------------|------------|
-| 0       | trial         | 19             | 1.9        |
-| 1       | basic monthly | 224            | 22.4       |
-| 2       | pro monthly   | 326            | 32.6       |
-| 3       | pro annual    | 195            | 19.5       |
-| 4       | churn         | 235            | 23.6       |
-
 
 | plan_id | plan_name     | customer_count | percentage |
 |---------|---------------|----------------|------------|
@@ -329,6 +321,11 @@ JOIN plans ON subscriptions.plan_id = plans.plan_id
 WHERE plans.plan_name = 'pro annual'
   AND YEAR(subscriptions.start_date) = 2020;
 ```
+| plan_name  | customer_count |
+|------------|----------------|
+| pro annual | 195            |
+
+
 | plan_name  | customer_count |
 |------------|----------------|
 | pro annual | 195            |
@@ -438,6 +435,22 @@ ORDER BY days_bucket.lower_lmt, days_bucket.upper_lmt;
 | 301       | 330       | 1              |
 | 331       | 360       | 1              |
 
+
+| lower_lmt | upper_lmt | customer_count |
+|-----------|-----------|----------------|
+| 0         | 30        | 49             |
+| 31        | 60        | 24             |
+| 61        | 90        | 34             |
+| 91        | 120       | 35             |
+| 121       | 150       | 42             |
+| 151       | 180       | 36             |
+| 181       | 210       | 26             |
+| 211       | 240       | 4              |
+| 241       | 270       | 5              |
+| 271       | 300       | 1              |
+| 301       | 330       | 1              |
+| 331       | 360       | 1              |
+
 ---
 ### 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
 ```TSQL
@@ -456,6 +469,11 @@ FROM cte
 WHERE current_plan = 2 AND next_plan = 1
 GROUP BY current_plan;
 ```
+| downgrade_count |
+|-----------------|
+| 0               |
+
+
 | downgrade_count |
 |-----------------|
 | 0               |
