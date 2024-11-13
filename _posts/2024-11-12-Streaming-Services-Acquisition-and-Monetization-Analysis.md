@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Customer Acquistion and Monetization Analysis
-image: "/posts/foodie-fi.png"
+image: "/posts/foodie-fi.png" align="center" width="400" height="400" 
 tags: [Customer Acquisition and Retention, Product Performance, Exploratory Analysis, SQL]
 ---
 
@@ -82,10 +82,8 @@ Table 2: subscriptions (example)
 | 2               | 3           | 2020-09-27     |
 
 Entity Relationship Diagram:
-<br>
-<img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png" >
-
-<src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png">
+<p align="center">
+<img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png" align="center" width="400" height="400">
 
 We need to use the plan_id as the join key to join the two tables. 
 <br>
@@ -601,3 +599,5 @@ To support the management team to monitor the business performance ongoingly, I 
 # Growth/Next Steps <a name="growth-next-steps"></a>
 * **Improve the customer retention** - Further analysis on customers engagement for the customer cohort who upgrade their plan, those who downgrade from pro to basic plans, and those who cancel their subscriptions to yield additional insights on on how to improve customer retentions.
 * **Reduce the customer churn rate** - Leverage the data insights to design an exit survey to customers who wish to cancel thier subscriptions. This could help Foodie Fi to identify the common reasons for their cancellation and take measures to reduce the customer churn. We could monitor the churn rate and convertion rate to validate the effectiveness of those measures.
+---
+Note: This project comes from [#8WeekSQLChallenge](https://8weeksqlchallenge.com/)
