@@ -70,6 +70,15 @@ Table 1: plans
 | 4 | churn | null |
 
 
+| **plan_id** | **plan_name** | **price** |
+|-------------|---------------|-----------|
+| 0           | trial         | 0         |
+| 1           | basic monthly | 9.90      |
+| 2           | pro monthly   | 19.90     |
+| 3           | pro annual    | 199       |
+| 4           | churn         | null      |
+
+
 Table 2: subscriptions (example)
 <br>
 | **customer_id** | **plan_id** | **start_date** |
