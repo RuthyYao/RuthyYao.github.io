@@ -205,6 +205,7 @@ ORDER BY subscriptions.plan_id;
 ---
 ### 4. What is the customer count and percentage of customers who have churned rounded to 1 decimal place?
 ```SQL
+
 -- Label each row with 1 or 0 based on the plan name (churn) and sum all the values with 1 divided by total
 SELECT
 	SUM(CASE WHEN plans.plan_name = 'churn' THEN 1 ELSE 0 END) AS churn_count,
@@ -212,6 +213,7 @@ SELECT
 FROM subscriptions
 LEFT JOIN plans
 	ON subscriptions.plan_id = plans.plan_id;
+
 ```
 | churn_count | churn_percentage   |
 |-------------|--------------------|
