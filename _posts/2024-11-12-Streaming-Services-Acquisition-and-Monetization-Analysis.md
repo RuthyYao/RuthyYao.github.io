@@ -69,8 +69,8 @@ Table 1: plans
 | 3 | pro annual | 199 |
 | 4 | churn | null |
 
-<br>
-Table 2: subscriptions
+
+Table 2: subscriptions (example)
 <br>
 | **customer_id** | **plan_id** | **start_date** |
 |---|---|---|
@@ -79,9 +79,5 @@ Table 2: subscriptions
 | 2 | 0 | 2020-09-20 |
 | 2 | 3 | 2020-09-27 |
 
-<br>
-| **Variable Name** | **Variable Type** |
-|---|---|
-| customer_id | int |
-| plan_id | int |
-| start_date | date |
+Entity Relationship Diagram:
+image: "/posts/foodie-fi-erd.png"
