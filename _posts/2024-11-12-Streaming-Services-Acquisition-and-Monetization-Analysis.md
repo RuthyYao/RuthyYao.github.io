@@ -85,7 +85,7 @@ Entity Relationship Diagram:
 <br>
 <img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png" >
 
-<"https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png">
+<src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png">
 
 We need to use the plan_id as the join key to join the two tables. 
 <br>
