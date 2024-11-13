@@ -205,14 +205,12 @@ ORDER BY subscriptions.plan_id;
 | 4      | churn         | 71          | 
 
 <br>
-
 | plan_id | plan_name     | subs_count |
 |---------|---------------|------------|
 | 1       | basic monthly | 8          |
 | 2       | pro monthly   | 60         |
 | 3       | pro annual    | 63         |
 | 4       | churn         | 71         |
-
 ---
 ### 4. What is the customer count and percentage of customers who have churned rounded to 1 decimal place?
 ```SQL
