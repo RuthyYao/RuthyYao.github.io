@@ -197,13 +197,6 @@ WHERE YEAR(subscriptions.start_date) > 2020
 GROUP BY subscriptions.plan_id, plans.plan_name
 ORDER BY subscriptions.plan_id;
 ```
-| plan_id | plan_name    | subs_count  |
-|--------|---------------|-------------|
-| 1      | basic monthly | 8           |
-| 2      | pro monthly   | 60          |
-| 3      | pro annual    | 63          |
-| 4      | churn         | 71          | 
-
 
 | plan_id | plan_name     | subs_count |
 |---------|---------------|------------|
@@ -225,9 +218,9 @@ LEFT JOIN plans
 	ON subscriptions.plan_id = plans.plan_id;
 
 ```
-| churn_count | churn_percentage   |
-|-------------|--------------------|
-| 307         | 30.7               |
+| churn_count | churn_percentage |
+|-------------|------------------|
+| 307         | 30.7             |
 
 ---
 ### 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
@@ -273,12 +266,12 @@ from cte
 WHERE current_plan = 'trial'
 GROUP BY next_plan;
 ```
-| post_trial_plan | count | percentage  |
-|-----------------|-------|-------------|
-| basic monthly   | 546        | 54.6   |
-| pro annual      | 37         | 3.7    |
-| pro monthly     | 325        | 32.5   |
-| churn           | 92         | 9.2    |
+| post_trial_plan | count | percentage |
+|-----------------|-------|------------|
+| basic monthly   | 546   | 54.6       |
+| pro annual      | 37    | 3.7        |
+| pro monthly     | 325   | 32.5       |
+| churn           | 92    | 9.2        |
 
 ---
 ### 7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
@@ -304,13 +297,13 @@ WHERE next_plan IS NULL
 GROUP BY plan_id, current_plan
 ORDER BY plan_id;
 ```
-| plan_id | plan_name     | customer_count | percentage  |
-|---------|---------------|-----------|------------------|
-| 0       | trial         | 19        | 1.9              |
-| 1       | basic monthly | 224       | 22.4             |
-| 2       | pro monthly   | 326       | 32.6             |
-| 3       | pro annual    | 195       | 19.5             |
-| 4       | churn         | 235       | 23.6             |
+| plan_id | plan_name     | customer_count | percentage |
+|---------|---------------|----------------|------------|
+| 0       | trial         | 19             | 1.9        |
+| 1       | basic monthly | 224            | 22.4       |
+| 2       | pro monthly   | 326            | 32.6       |
+| 3       | pro annual    | 195            | 19.5       |
+| 4       | churn         | 235            | 23.6       |
 
 ---
 ### 8. How many customers have upgraded to an annual plan in 2020?
@@ -323,9 +316,9 @@ JOIN plans ON subscriptions.plan_id = plans.plan_id
 WHERE plans.plan_name = 'pro annual'
   AND YEAR(subscriptions.start_date) = 2020;
 ```
-| plan_name  | customer_count  |
-|------------|-----------------|
-| pro annual |195              |
+| plan_name  | customer_count |
+|------------|----------------|
+| pro annual | 195            |
 
 ---
 ### 9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
@@ -354,9 +347,9 @@ FROM AnnualPlan
 JOIN JoinDate
 WHERE AnnualPlan.customer_id = JoinDate.customer_id;
 ```
-| avg_days_to_annual  |
-|---------------------|
-| 105                 |
+| avg_days_to_annual |
+|--------------------|
+| 105                |
 
 On average, it takes 105 days for a customer to an annual plan from the day they join Foodie-Fi.
 
@@ -417,20 +410,20 @@ LEFT JOIN DayDiff
 GROUP BY days_bucket.lower_lmt, days_bucket.upper_lmt
 ORDER BY days_bucket.lower_lmt, days_bucket.upper_lmt;
 ```
-| lower_lmt    | upper_lmt  | customer_count  |
-|--------------|------------|-----------------|
-| 0            | 30         | 49              |
-| 31           | 60         | 24              |
-| 61           | 90         | 34              |
-| 91           | 120        | 35              |
-| 121          | 150        | 42              |
-| 151          | 180        | 36              |
-| 181          | 210        | 26              |
-| 211          | 240        | 4               |
-| 241          | 270        | 5               |
-| 271          | 300        | 1               |
-| 301          | 330        | 1               |
-| 331          | 360        | 1               |
+| lower_lmt | upper_lmt | customer_count |
+|-----------|-----------|----------------|
+| 0         | 30        | 49             |
+| 31        | 60        | 24             |
+| 61        | 90        | 34             |
+| 91        | 120       | 35             |
+| 121       | 150       | 42             |
+| 151       | 180       | 36             |
+| 181       | 210       | 26             |
+| 211       | 240       | 4              |
+| 241       | 270       | 5              |
+| 271       | 300       | 1              |
+| 301       | 330       | 1              |
+| 331       | 360       | 1              |
 
 ---
 ### 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
@@ -452,6 +445,7 @@ GROUP BY current_plan;
 ```
 | downgrade_count |
 |-----------------|
+| 0               |
 
 
 There were no customers downgrading from a pro monthly to a basic monthly plan in 2020.
@@ -563,20 +557,20 @@ SELECT
     ROUND((revenue/LAG(revenue) OVER(ORDER BY month) - 1)*100,1) AS rev_growth_rate
 from mth_rev;
 ```
-| month  | revenue  | rev_growth_rate |
-|--------|----------|-----------------|
-| 1      | 1282.00  | NULL            |
-| 2      | 2792.60  | 117.8           |
-| 3      | 4342.40  | 50.5            |
-| 4      | 5972.70  | 39.3            |
-| 5      | 7324.10  | 22.2            |
-| 6      | 8765.50  | 19.0            |
-| 7      | 10207.50 | 16.9            |
-| 8      | 12047.40 | 18.8            |
-| 9      | 12913.20 | 7.3             |
-| 10     | 14952.50 | 15.1            |
-| 11     | 12862.70 | -14.2           |
-| 12     | 13429.50 | 4.3             |
+| month | revenue  | rev_growth_rate |
+|-------|----------|-----------------|
+| 1     | 1282.00  | NULL            |
+| 2     | 2792.60  | 117.8           |
+| 3     | 4342.40  | 50.5            |
+| 4     | 5972.70  | 39.3            |
+| 5     | 7324.10  | 22.2            |
+| 6     | 8765.50  | 19.0            |
+| 7     | 10207.50 | 16.9            |
+| 8     | 12047.40 | 18.8            |
+| 9     | 12913.20 | 7.3             |
+| 10    | 14952.50 | 15.1            |
+| 11    | 12862.70 | -14.2           |
+| 12    | 13429.50 | 4.3             |
 
 # Results & Application  <a name="results-application"></a>
 Foodie Fi have acquired 1000 customers since the business started with c.80 new customers each month. Of the total 1000 customers, 307 customers has churned - churn rate 30.7%.  Data shows that after the trial, 55% of the customers upgrade to the basic monthly plan, 32.5% of the customers subscribed the pro monthly plan, 3.7% of the customers upgraded to the pro annual plan straightaway and 9.2% of the customers churned. It took averagely 105 days from trial to upgrade to a pro plan (paid premium plans). In 2021, there were 123 customers upgraded to a pro plan.  
