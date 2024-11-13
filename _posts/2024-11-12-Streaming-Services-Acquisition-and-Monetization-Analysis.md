@@ -349,3 +349,190 @@ WHERE AnnualPlan.customer_id = JoinDate.customer_id;
 On average, it takes 105 days for a customer to an annual plan from the day they join Foodie-Fi.
 
 ---
+### 10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)?
+Solution structure: 
+* Utilize 2 CTEs in the previous question: ```JoinDate``` and ```AnnualPlan``` to calculate the number of days between ```join_date (trial_date)``` and ```annual_date```, then put that to new CTE named ```DayDiff```
+* Create a recursive CTE named ```days_bucket``` to generate 30-days periods (i.e. 0-30 days, 31-60 days etc)
+* Left join from ```days_bucket``` with ```DayDiff``` 
+    
+```TSQL
+WITH RECURSIVE 
+AnnualPlan AS (
+SELECT
+	subscriptions.customer_id,
+    subscriptions.start_date AS annual_date
+FROM subscriptions
+LEFT JOIN plans
+	ON subscriptions.plan_id = plans.plan_id    
+WHERE plans.plan_name = 'pro annual'
+),
+JoinDate AS (
+SELECT
+	subscriptions.customer_id,
+    subscriptions.start_date AS join_date
+FROM subscriptions
+LEFT JOIN plans
+	ON subscriptions.plan_id = plans.plan_id
+WHERE plans.plan_name = 'trial'
+ ),
+DayDiff AS(
+SELECT
+	AnnualPlan.customer_id,
+    DATEDIFF(annual_date,join_date) AS days_to_annual
+FROM AnnualPlan
+JOIN JoinDate
+	ON AnnualPlan.customer_id = JoinDate.customer_id
+),
+days_bucket AS(
+SELECT
+	0 AS lower_lmt,
+    30 AS upper_lmt
+UNION ALL
+SELECT
+	upper_lmt + 1 AS lower_lmt,
+    upper_lmt + 30 AS upper_lmt
+FROM days_bucket
+WHERE upper_lmt < 360
+)
+
+SELECT 
+	days_bucket.lower_lmt,
+    days_bucket.upper_lmt,
+    COUNT(DayDiff.customer_id) AS num_of_customers
+FROM days_bucket
+LEFT JOIN DayDiff
+	ON DayDiff.days_to_annual >lower_lmt AND DayDiff.days_to_annual <= upper_lmt
+GROUP BY days_bucket.lower_lmt, days_bucket.upper_lmt
+ORDER BY days_bucket.lower_lmt, days_bucket.upper_lmt;
+```
+| lower_lmt    | upper_lmt  | customer_count  |
+|--------------|------------|-----------------|
+| 0            | 30         | 49              |
+| 31           | 60         | 24              |
+| 61           | 90         | 34              |
+| 91           | 120        | 35              |
+| 121          | 150        | 42              |
+| 151          | 180        | 36              |
+| 181          | 210        | 26              |
+| 211          | 240        | 4               |
+| 241          | 270        | 5               |
+| 271          | 300        | 1               |
+| 301          | 330        | 1               |
+| 331          | 360        | 1               |
+
+---
+### 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
+```TSQL
+WITH cte AS(
+SELECT
+	customer_id,
+    plan_id AS current_plan,
+    start_date,
+    LEAD (plan_id) OVER(PARTITION BY customer_id ORDER BY plan_id) AS next_plan
+FROM subscriptions
+WHERE Year(start_date) = 2020
+)
+SELECT
+	COUNT(customer_id) AS downgrade_count
+FROM cte
+WHERE current_plan = 2 AND next_plan = 1
+GROUP BY current_plan;
+```
+| downgrade_count |
+|-----------------|
+
+
+There were no customers downgrading from a pro monthly to a basic monthly plan in 2020.
+---
+### Challenge Question: 
+Create a payment table for the year 2020 that includes amounts paid by each customer in the subscriptions table with the following requirements:
+<br>
+* monthly payments always occur on the same day of month as the original start_date of any monthly paid plan
+* upgrades from basic to monthly or pro plans are reduced by the current paid amount in that month and start immediately
+* upgrades from pro monthly to pro annual are paid at the end of the current billing period and also starts at the end of the month period
+* once a customer churns they will no longer make payments
+
+ Example outputs for this table might look like the following:
+
+| customer_id | plan_id | plan_name     | payment_date | amount | payment_order  |
+|-------------|---------|---------------|--------------|--------|----------------|
+| 1           | 1       | basic monthly | 2020-08-08   | 9.90   | 1              |
+| 1           | 1       | basic monthly | 2020-09-08   | 9.90   | 2              |
+| 1           | 1       | basic monthly | 2020-10-08   | 9.90   | 3              |
+| 1           | 1       | basic monthly | 2020-11-08   | 9.90   | 4              |
+| 1           | 1       | basic monthly | 2020-12-08   | 9.90   | 5              |
+| 2           | 3       | pro annual    | 2020-09-27   | 199.00 | 1              |
+| 13          | 1       | basic monthly | 2020-12-22   | 9.90   | 1              |
+| 15          | 2       | pro monthly   | 2020-03-24   | 19.90  | 1              |
+| 15          | 2       | pro monthly   | 2020-04-24   | 19.90  | 2              |
+| 16          | 1       | basic monthly | 2020-06-07   | 9.90   | 1              |
+| 16          | 1       | basic monthly | 2020-07-07   | 9.90   | 2              |
+| 16          | 1       | basic monthly | 2020-08-07   | 9.90   | 3              |
+| 16          | 1       | basic monthly | 2020-09-07   | 9.90   | 4              |
+| 16          | 1       | basic monthly | 2020-10-07   | 9.90   | 5              |
+| 16          | 3       | pro annual    | 2020-10-21   | 189.10 | 6              |
+| 18          | 2       | pro monthly   | 2020-07-13   | 19.90  | 1              |
+| 18          | 2       | pro monthly   | 2020-08-13   | 19.90  | 2              |
+| 18          | 2       | pro monthly   | 2020-09-13   | 19.90  | 3              |
+| 18          | 2       | pro monthly   | 2020-10-13   | 19.90  | 4              |
+
+
+Solution structure:
+* Using revursive cte to create a table that list out all the monthly payment shedule 2020
+* Use CASE statement to calculate the last date of their current plan.
+    * If the customer stay in the current plan until the end of 2020, the last date will be 2020-12-31.
+    * If the customer change the plan during the year, the last date will be last payment cycle date before he change to the next plan i.e the start_date + the month difference between the new plan start_date and the current plan start_date.
+    * Annual plan is not applicable.
+* Select all the required columns to create a new table.
+
+```TSQL
+CREATE TABLE payment
+WITH RECURSIVE payment_schedule AS (
+SELECT
+	subscriptions.customer_id,
+	subscriptions.plan_id,
+    plans.plan_name,
+    subscriptions.start_date AS payment_date,
+	CASE WHEN LEAD(subscriptions.start_date) OVER (PARTITION BY subscriptions.customer_id ORDER BY subscriptions.start_date) IS NULL
+		THEN '2020-12-31'  -- if there is no next plan, the last_date would be the end of the year.
+             ELSE DATE_ADD(
+                  subscriptions.start_date,
+                  INTERVAL TIMESTAMPDIFF(
+                       MONTH,
+                       subscriptions.start_date,
+                       LEAD(subscriptions.start_date) OVER (PARTITION BY subscriptions.customer_id ORDER BY subscriptions.start_date)
+                        ) MONTH
+                    )
+	END AS last_date,  -- work out the last_date - the last day of the current plan.
+    plans.price AS amount
+FROM subscriptions
+LEFT JOIN plans
+    ON subscriptions.plan_id = plans.plan_id
+WHERE plans.plan_name != 'trial'  -- exclude trial as trial doesn't generate payments.
+    AND YEAR(subscriptions.start_date) = 2020
+
+UNION ALL
+-- expand the table with one row for each payment month
+SELECT 
+    customer_id,
+    plan_id,
+    plan_name,
+    DATE_ADD(payment_date, INTERVAL 1 MONTH) AS payment_date,
+    last_date,
+    amount,
+    ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY payment_date) AS payment_order
+FROM payment_schedule
+WHERE DATE_ADD(payment_date, INTERVAL 1 MONTH) <= last_date  -- stop adding new rows once the payment_date reach the limit - last_date
+    AND plan_name != 'Pro Annual'  -- annual plan has only one payment for the year hence it doesn't need to expand.
+)
+	
+SELECT
+    customer_id,
+    plan_id,
+    plan_name,
+    payment_date,
+    amount
+FROM payment_schedule
+WHERE amount IS NOT NULL  -- exclude churns
+ORDER BY customer_id;
+```
