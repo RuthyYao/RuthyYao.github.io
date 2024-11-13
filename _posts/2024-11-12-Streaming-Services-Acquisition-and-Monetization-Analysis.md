@@ -61,14 +61,6 @@ The original dataset has two data tables.
 
 Table 1: plans
 <br>
-| **plan_id** | **plan_name** | **price** |
-|---|---|---|
-| 0 | trial | 0 |
-| 1 | basic monthly | 9.90 |
-| 2 | pro monthly | 19.90 |
-| 3 | pro annual | 199 |
-| 4 | churn | null |
-
 
 | **plan_id** | **plan_name** | **price** |
 |-------------|---------------|-----------|
@@ -81,12 +73,13 @@ Table 1: plans
 
 Table 2: subscriptions (example)
 <br>
+
 | **customer_id** | **plan_id** | **start_date** |
-|---|---|---|
-| 1 | 0 | 2020-08-01 |
-| 1 | 1 | 2020-08-08 |
-| 2 | 0 | 2020-09-20 |
-| 2 | 3 | 2020-09-27 |
+|-----------------|-------------|----------------|
+| 1               | 0           | 2020-08-01     |
+| 1               | 1           | 2020-08-08     |
+| 2               | 0           | 2020-09-20     |
+| 2               | 3           | 2020-09-27     |
 
 Entity Relationship Diagram:
 <br>
