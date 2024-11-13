@@ -219,10 +219,6 @@ LEFT JOIN plans
 	ON subscriptions.plan_id = plans.plan_id;
 
 ```
-| churn_count | churn_percentage |
-|-------------|------------------|
-| 307         | 30.7             |
-
 
 | churn_count | churn_percentage |
 |-------------|------------------|
@@ -247,6 +243,11 @@ SELECT
 FROM cte
 WHERE current_plan = 'trial' AND next_plan = 'churn';
 ```
+| churn_after_trial | churn_percentage |
+|-------------------|------------------|
+| 92                | 9                |
+
+
 | churn_after_trial | churn_percentage |
 |-------------------|------------------|
 | 92                | 9                |
