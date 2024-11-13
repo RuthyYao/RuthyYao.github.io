@@ -25,9 +25,8 @@ ___
 # Project Overview  <a name="overview-main"></a>
 
 ### Business Problem <a name="overview-business-problem"></a>
-Foodie Fi started the video streaming service that only had food related content a year ago. They sell monthly and annual sbuscription plans, giving their customer unlimited on-demand access to exclusively food related vedios from around the world. The management team wants to review the product performance and would like to make data-based decisions on products, customers and other business growth strategies.
+Foodie Fi started the video streaming service that only had food related content a year ago. They sell monthly and annual sbuscription plans, giving their customer unlimited on-demand access to exclusively food related vedios from around the world. The management team wants to review the product performance and would like to make data-based decisions on products, customers and other business growth strategies in the future.
 <br>
-
 
 ### Actions <a name="overview-actions"></a>
 I first compiled the necessary data from the data tables that contains the plans and customer subscriptions data.
