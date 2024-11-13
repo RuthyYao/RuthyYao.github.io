@@ -243,10 +243,6 @@ SELECT
 FROM cte
 WHERE current_plan = 'trial' AND next_plan = 'churn';
 ```
-| churn_after_trial | churn_percentage |
-|-------------------|------------------|
-| 92                | 9                |
-
 
 | churn_after_trial | churn_percentage |
 |-------------------|------------------|
@@ -273,6 +269,14 @@ from cte
 WHERE current_plan = 'trial'
 GROUP BY next_plan;
 ```
+| post_trial_plan | count | percentage |
+|-----------------|-------|------------|
+| basic monthly   | 546   | 54.6       |
+| pro annual      | 37    | 3.7        |
+| pro monthly     | 325   | 32.5       |
+| churn           | 92    | 9.2        |
+
+
 | post_trial_plan | count | percentage |
 |-----------------|-------|------------|
 | basic monthly   | 546   | 54.6       |
