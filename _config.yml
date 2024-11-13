@@ -15,15 +15,15 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 #-------------------------------
 # About Section
-subtitle: Data Science <span style="color:#f58506"> Portfolio </span>
+subtitle: Data Analytcis / Data Science <span style="color:#f58506"> Portfolio </span>
 location: "Sydney, AU"
 resume_url: /docs/resume.docx
 avatar_image: /img/RY_profile_photo Cropped.jpg
 
 #-------------------------------
 # Contact links
-linkedln: "https://linkedln.com/#" # Add your linkedln handle
-github: "https://github.com/#"  # Add your github handle
+linkedln: "https://linkedln.com/ruthy-yao-b3258b25/" # Add your linkedln handle
+github: "https://github.com/RuthyYao"  # Add your github handle
 
 paginate: 6
 paginate_path: "/page/:num"
