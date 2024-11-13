@@ -149,6 +149,11 @@ FROM subscriptions;
 |-----------------|
 | 1000            |
 
+
+| total_customers |
+|-----------------|
+| 1000            |
+
 ---
 ### 2. What is the monthly distribution of trial plan start_date values for our dataset - use the start of the month as the group by value?
 ```TSQL
@@ -321,10 +326,6 @@ JOIN plans ON subscriptions.plan_id = plans.plan_id
 WHERE plans.plan_name = 'pro annual'
   AND YEAR(subscriptions.start_date) = 2020;
 ```
-| plan_name  | customer_count |
-|------------|----------------|
-| pro annual | 195            |
-
 
 | plan_name  | customer_count |
 |------------|----------------|
@@ -357,6 +358,11 @@ FROM AnnualPlan
 JOIN JoinDate
 WHERE AnnualPlan.customer_id = JoinDate.customer_id;
 ```
+| avg_days_to_annual |
+|--------------------|
+| 105                |
+
+
 | avg_days_to_annual |
 |--------------------|
 | 105                |
@@ -420,21 +426,6 @@ LEFT JOIN DayDiff
 GROUP BY days_bucket.lower_lmt, days_bucket.upper_lmt
 ORDER BY days_bucket.lower_lmt, days_bucket.upper_lmt;
 ```
-| lower_lmt | upper_lmt | customer_count |
-|-----------|-----------|----------------|
-| 0         | 30        | 49             |
-| 31        | 60        | 24             |
-| 61        | 90        | 34             |
-| 91        | 120       | 35             |
-| 121       | 150       | 42             |
-| 151       | 180       | 36             |
-| 181       | 210       | 26             |
-| 211       | 240       | 4              |
-| 241       | 270       | 5              |
-| 271       | 300       | 1              |
-| 301       | 330       | 1              |
-| 331       | 360       | 1              |
-
 
 | lower_lmt | upper_lmt | customer_count |
 |-----------|-----------|----------------|
@@ -469,10 +460,6 @@ FROM cte
 WHERE current_plan = 2 AND next_plan = 1
 GROUP BY current_plan;
 ```
-| downgrade_count |
-|-----------------|
-| 0               |
-
 
 | downgrade_count |
 |-----------------|
@@ -602,6 +589,23 @@ from mth_rev;
 | 10    | 14952.50 | 15.1            |
 | 11    | 12862.70 | -14.2           |
 | 12    | 13429.50 | 4.3             |
+
+
+| month | revenue  | rev_growth_rate |
+|-------|----------|-----------------|
+| 1     | 1282.00  | NULL            |
+| 2     | 2792.60  | 117.8           |
+| 3     | 4342.40  | 50.5            |
+| 4     | 5972.70  | 39.3            |
+| 5     | 7324.10  | 22.2            |
+| 6     | 8765.50  | 19.0            |
+| 7     | 10207.50 | 16.9            |
+| 8     | 12047.40 | 18.8            |
+| 9     | 12913.20 | 7.3             |
+| 10    | 14952.50 | 15.1            |
+| 11    | 12862.70 | -14.2           |
+| 12    | 13429.50 | 4.3             |
+
 
 # Results & Application  <a name="results-application"></a>
 Foodie Fi have acquired 1000 customers since the business started with c.80 new customers each month. Of the total 1000 customers, 307 customers has churned - churn rate 30.7%.  Data shows that after the trial, 55% of the customers upgrade to the basic monthly plan, 32.5% of the customers subscribed the pro monthly plan, 3.7% of the customers upgraded to the pro annual plan straightaway and 9.2% of the customers churned. It took averagely 105 days from trial to upgrade to a pro plan (paid premium plans). In 2021, there were 123 customers upgraded to a pro plan.  
