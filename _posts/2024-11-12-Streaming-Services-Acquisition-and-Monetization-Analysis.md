@@ -81,5 +81,271 @@ Table 2: subscriptions (example)
 
 Entity Relationship Diagram:
 <br>
-image: "/posts/foodie-fi-erd.png"
 <img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png" >
+
+We need to use the plan_id as the join key to join the two tables. 
+<br>
+<br>
+# Exploratory Analysis  <a name="exploratory-analysis"></a>
+## Customer Onboarding Journey 
+```TSQL
+SELECT 
+	subscriptions.*,
+	plans.plan_name,
+	plans.price
+FROM subscriptions
+JOIN plans ON subscriptions.plan_id = plans.plan_id
+WHERE customer_id IN (1, 2, 11, 13, 15, 16, 18, 19);
+```
+| customer_id | plan_id | start_date | plan_name     | price   |
+|-------------|---------|------------|---------------|---------|
+| 1           | 0       | 2020-08-01 | trial         | 0.00    |
+| 1           | 1       | 2020-08-08 | basic monthly | 9.90    |
+| 2           | 0       | 2020-09-20 | trial         | 0.00    |
+| 2           | 3       | 2020-09-27 | pro annual    | 199.00  |
+| 11          | 0       | 2020-11-19 | trial         | 0.00    |
+| 11          | 4       | 2020-11-26 | churn         | NULL    |
+| 13          | 0       | 2020-12-15 | trial         | 0.00    |
+| 13          | 1       | 2020-12-22 | basic monthly | 9.90    |
+| 13          | 2       | 2021-03-29 | pro monthly   | 19.90   |
+| 15          | 0       | 2020-03-17 | trial         | 0.00    |
+| 15          | 2       | 2020-03-24 | pro monthly   | 19.90   |
+| 15          | 4       | 2020-04-29 | churn         | NULL    |
+| 16          | 0       | 2020-05-31 | trial         | 0.00    |
+| 16          | 1       | 2020-06-07 | basic monthly | 9.90    |
+| 16          | 3       | 2020-10-21 | pro annual    | 199.00  |
+| 18          | 0       | 2020-07-06 | trial         | 0.00    |
+| 18          | 2       | 2020-07-13 | pro monthly   | 19.90   |
+| 19          | 0       | 2020-06-22 | trial         | 0.00    |
+| 19          | 2       | 2020-06-29 | pro monthly   | 19.90   |
+
+* Customer 1 - signed up to 7-day free trial on 01/08/2020. After that time, he/she didn't cancel the subsciption, so the system automatically upgraded it to basic monthly plan on 08/08/2020.
+
+* Customer 2 - signed up to 7-day free trial on 20/09/2020. After that time, he/she upgraded to pro annual plan on 27/09/2020.
+
+* Customer 11 -  signed up to 7-day free trial on 19/11/2020. After that time, he/she cancelled the subsciption on 26/11/2020.
+
+* Customer 13 - signed up to 7-day free trial on 15/12/2020. After that time, he/she didn't cancelled the subsciption, so the system automatically upgraded it to basic monthly plan on 22/12/2020. He/she continued using that plan for 2 months. On 29/03/2020 (still in the 3rd month using basic monthly plan), he/she upgraded to pro monthly plan.
+
+* Customer 15 - signed up to 7-day free trial on 17/03/2020. After that time, he/she didn't cancel the subsciption, so the system automatically upgraded it basic monthly plan on 24/03/2020. He/she then cancelled that plan after 5 days (29/03/2020). He/she was able to use the basic monthly plan until 24/04/2020.
+
+* Customer 16 - signed up to 7-day free trial on 31/05/2020. After that time, he/she didn't cancel the subsciption, so the system automatically upgraded it to basic monthly plan on 07/06/2020. He/she continued using that plan for 4 months. On 21/10/2020 (still in the 4th month using basic monthly plan), he/she upgraded to pro annual plan.
+
+* Customer 18 - signed up to 7-day free trial on 06/07/2020. After the trial time, he/she upgraded the subscription to pro monthly plan on 13/07/2020.
+
+* Customer 19 - signed up to 7-day free trial on 22/06/2020. After that time, he/she upgraded the subscription to pro monthly plan on 29/06/2020. After 2 months using that plan, he/she upgraded to pro annual plan on 29/08/2020.
+<br>
+
+## Data Analysis Questions
+### 1. How many customers has Foodie-Fi ever had?
+```TSQL
+SELECT COUNT(DISTINCT customer_id) AS total_customers
+FROM subscriptions;
+```
+| total_customers  |
+|------------------|
+| 1000             |
+
+---
+### 2. What is the monthly distribution of trial plan start_date values for our dataset - use the start of the month as the group by value?
+```TSQL
+SELECT 
+    DATE_FORMAT(
+		DATE_ADD(
+			subscriptions.start_date, INTERVAL 1-DAYOFMONTH(subscriptions.start_date) DAY
+            ),
+		'%Y-%m'
+    ) AS start_month,
+    plans.plan_name,
+    COUNT(subscriptions.customer_id) AS customer_count
+FROM subscriptions
+LEFT JOIN plans
+	ON subscriptions.plan_id = plans.plan_id
+WHERE plans.plan_name = 'trial'
+GROUP BY start_month
+ORDER BY start_month;
+```
+
+| start_month   | plan_name | customer_count|
+|---------------|-----------|---------------|
+| 2020-01       |trial      |	88          |
+| 2020-02       |trial      |	68          |
+| 2020-03	    |trial      |	94          |
+| 2020-04	    |trial      |	81          |
+| 2020-05	    |trial      |	88          |
+| 2020-06	    |trial      |	79          |
+| 2020-07	    |trial      |	89          |
+| 2020-08	    |trial      |	88          |
+| 2020-09	    |trial      |	87          |
+| 2020-10	    |trial      |	79          |
+| 2020-11	    |trial      |	75          |
+| 2020-12	    |trial      |	84          |
+
+---
+### 3. What plan start_date values occur after the year 2020 for our dataset? Show the breakdown by count of events for each plan_name?
+```TSQL
+SELECT 
+	subscriptions.plan_id,
+    plans.plan_name,
+    COUNT(customer_id) AS subs_count
+FROM subscriptions
+LEFT JOIN plans
+	ON subscriptions.plan_id = plans.plan_id
+WHERE YEAR(subscriptions.start_date) > 2020
+GROUP BY subscriptions.plan_id, plans.plan_name
+ORDER BY subscriptions.plan_id;
+```
+| plan_id | plan_name    | subs_count  |
+|--------|---------------|-------------|
+| 1      | basic monthly | 8           |
+| 2      | pro monthly   | 60          |     
+| 3      | pro annual    | 63          |
+| 4      | churn         | 71          |
+
+---
+### 4. What is the customer count and percentage of customers who have churned rounded to 1 decimal place?
+```TSQL
+-- Label each row with 1 or 0 based on the plan name (churn) and sum all the values with 1 divided by total
+SELECT
+	SUM(CASE WHEN plans.plan_name = 'churn' THEN 1 ELSE 0 END) AS churn_count,
+    ROUND(SUM(CASE WHEN plans.plan_name = 'churn' THEN 1 ELSE 0 END) *100 / COUNT(DISTINCT customer_id),1) AS churn_percentage
+FROM subscriptions
+LEFT JOIN plans
+	ON subscriptions.plan_id = plans.plan_id;
+```
+| churn_count | churn_percentage   |
+|-------------|--------------------|
+| 307         | 30.7               |
+
+---
+### 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
+```TSQL
+WITH cte AS (
+	SELECT 
+		subscriptions.customer_id,
+		subscriptions.plan_id,
+		plans.plan_name AS current_plan,
+        LEAD(plans.plan_name) OVER (PARTITION BY subscriptions.customer_id ORDER BY subscriptions.start_date) AS next_plan
+	FROM subscriptions
+	LEFT JOIN plans
+		ON subscriptions.plan_id = plans.plan_id
+  )
+SELECT	
+	COUNT(customer_id) AS churn_after_trial,
+    ROUND(COUNT(customer_id) *100 / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions),0) AS churn_percentage
+FROM cte
+WHERE current_plan = 'trial' AND next_plan = 'churn';
+```
+| churn_after_trial | churn_percentage |
+|-------------------|------------------|
+| 92                | 9                |
+
+---
+### 6. What is the number and percentage of customer plans after their initial free trial?
+```TSQL
+WITH cte AS (
+	SELECT 
+		subscriptions.customer_id,
+		subscriptions.plan_id,
+		plans.plan_name AS current_plan,
+        LEAD(plans.plan_name) OVER (PARTITION BY subscriptions.customer_id ORDER BY subscriptions.start_date) AS next_plan
+	FROM subscriptions
+	LEFT JOIN plans
+		ON subscriptions.plan_id = plans.plan_id
+ )
+ SELECT
+	next_plan AS post_trial_plan,
+    COUNT(customer_id) AS count,
+    ROUND(COUNT(customer_id) *100 / (SELECT COUNT(customer_id) FROM subscriptions WHERE plan_id = 0),1) AS percentage
+from cte
+WHERE current_plan = 'trial'
+GROUP BY next_plan;
+```
+| post_trial_plan | count | percentage  |
+|-----------------|-------|-------------|
+| basic monthly   | 546        | 54.6   |
+| pro annual      | 37         | 3.7    |
+| pro monthly     | 325        | 32.5   |
+| churn           | 92         | 9.2    |
+
+---
+### 7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
+```TSQL
+WITH cte AS (	
+    SELECT 
+		subscriptions.customer_id,
+		subscriptions.plan_id,
+		plans.plan_name AS current_plan,
+        LEAD(plans.plan_name) OVER (PARTITION BY subscriptions.customer_id ORDER BY subscriptions.start_date) AS next_plan
+	FROM subscriptions
+    LEFT JOIN plans
+        ON subscriptions.plan_id = plans.plan_id
+	WHERE subscriptions.start_date <= '2020-12-31'
+	)
+SELECT 
+    plan_id,
+    current_plan,
+    COUNT(customer_id) AS customer_count,
+	ROUND(COUNT(customer_id) *100 / (SELECT COUNT(DISTINCT customer_ID) FROM subscriptions WHERE start_date <= '2020-12-31'),1) AS percentage
+FROM cte
+WHERE next_plan IS NULL
+GROUP BY plan_id, current_plan
+ORDER BY plan_id;
+```
+| plan_id | plan_name     | customer_count | percentage  |
+|---------|---------------|-----------|------------------|
+| 0       | trial         | 19        | 1.9              |
+| 1       | basic monthly | 224       | 22.4             |
+| 2       | pro monthly   | 326       | 32.6             |
+| 3       | pro annual    | 195       | 19.5             |
+| 4       | churn         | 235       | 23.6             |
+
+---
+### 8. How many customers have upgraded to an annual plan in 2020?
+```TSQL
+SELECT 
+  plans.plan_name,
+  COUNT(DISTINCT customer_id) AS customer_count
+FROM subscriptions
+JOIN plans ON subscriptions.plan_id = plans.plan_id
+WHERE plans.plan_name = 'pro annual'
+  AND YEAR(subscriptions.start_date) = 2020;
+```
+| plan_name  | customer_count  |
+|------------|-----------------|
+| pro annual |195              |
+
+---
+### 9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
+```TSQL
+WITH AnnualPlan AS (
+SELECT
+	subscriptions.customer_id,
+    subscriptions.start_date AS annualplan_start_date
+FROM subscriptions
+LEFT JOIN plans
+	ON subscriptions.plan_id = plans.plan_id    
+WHERE plans.plan_name = 'pro annual'
+),
+JoinDate AS (
+SELECT
+	subscriptions.customer_id,
+    subscriptions.start_date AS join_date
+FROM subscriptions
+LEFT JOIN plans
+	ON subscriptions.plan_id = plans.plan_id
+WHERE plans.plan_name = 'trial'
+ )
+ SELECT 
+	ROUND(AVG(DATEDIFF(annualplan_start_date,join_date)),0) AS avg_days_to_annual
+FROM AnnualPlan
+JOIN JoinDate
+WHERE AnnualPlan.customer_id = JoinDate.customer_id;
+```
+| avg_days_to_annual  |
+|---------------------|
+| 105                 |
+
+On average, it takes 105 days for a customer to an annual plan from the day they join Foodie-Fi.
+
+---
