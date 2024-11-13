@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Customer Acquistion and Monetization Analysis
-image: "/posts/foodie-fi.png" 
+image: "/posts/foodie-fi.png"
 tags: [Customer Acquisition and Retention, Product Performance, Exploratory Analysis, SQL]
 ---
 
@@ -82,8 +82,8 @@ Table 2: subscriptions (example)
 | 2               | 3           | 2020-09-27     |
 
 Entity Relationship Diagram:
-<p align="center">
-<img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png" align="center" width="800" height="400">
+
+<img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/posts/foodie-fi-erd.png">
 
 We need to use the plan_id as the join key to join the two tables. 
 
