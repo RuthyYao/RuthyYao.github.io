@@ -5,11 +5,15 @@ image: "/movie-success-analysis/front_image.png"
 tags: [Exploratory Analysis, Python]
 ---
 
+Our client is preparing to enter the movie production market. To increase their chances of success, I analysed over 2000 movie titles and provide recommendation on genres, release month and production budget.
+
+
 ## Overview
 
 This project analyses the key successful factors of a movie studio to prepare Microsoft to enter the movie production market. Description analysis of the popularity score, gross revenue, production budget and profit shows that the top performing genres are Animations, Sci-fi and Adventures and the best months to release movies in a year are May, July and Novemeber. It is advisable to allocate at least $500m of budget to movie production each year.
 
 ## Business Problem
+
 As a new entrant to the movie production market, Microsoft has limited industry knowledge. To complete with globally well-established production companies which have generally over seven to eight decades of history, it is crucial to dive into the vast movie database to distill insights on where to start, when to start and how much funding is required. This will help Microsoft to bridge the knowledge gap, allocate the resources more efficeintly and increase its chances of success for the new studio. 
 
 ## Data and Methods
