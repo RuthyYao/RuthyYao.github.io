@@ -26,7 +26,6 @@ The project uses descriptive analysis, including description of the average popu
 
 Based on the average popularity socre of each genre and the aerage worldwide gross revenue of each genre, the most popular and the best performing genres are Animation, Sci-fi and Adventure.
 
-![popularity_score_per_genre](./images/popularity_score_per_genre.png)
 <br>
 ![alt text](/img/movie-success-analysis/popularity_score_per_genre.png "Popularity Score per Genre")
 ![gross_revenue_per_genre](./images/gross_revenue_per_genre.png)
@@ -35,13 +34,12 @@ Based on the average popularity socre of each genre and the aerage worldwide gro
 <br>
 The worldwide gross revenue typically peaks in May, July and November, potentially due to school holiday and the "Academy Awards" effect - studios release their movies two or three months before the Awards in order to be eligible for the nomination. 
 
-![average_gross_revenue_by_month](./images/average_gross_revenue_by_month.png)
 
 ![alt text](/img/movie-success-analysis/average_gross_revenue_by_month.png "Average Gross Revenue by Month")
 
 
 Studios commit a production budget of averagely $550-$700 per annum. 
-![studio_annual_production_budget](./images/Studio_annual_production_budget.png)
+
 
 ![alt text](/img/movie-success-analysis/Studio_annual_production_budget.png "Studio Annual Production Budget")
 
