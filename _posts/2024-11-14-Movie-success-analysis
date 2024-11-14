@@ -1,15 +1,9 @@
 ---
 layout: post
 title: Movie Success Analysis
-image: "/posts/foodie-fi.png"
-tags: [movies data, Exploratory Analysis, Python]
+image: "/movie-success-analysis/front_image.png"
+tags: [Exploratory Analysis, Python]
 ---
-
-![homepage image](./images/front_image.png)
-
-# Data Insights for Starting a New Movie Studio
-
-**Author**: [Ruthy Yao](mailto:zejia.yao@gmail.com)
 
 ## Overview
 
