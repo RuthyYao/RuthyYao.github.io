@@ -28,12 +28,13 @@ Based on the average popularity socre of each genre and the aerage worldwide gro
 
 <br>
 ![alt text](/img/movie-success-analysis/popularity_score_per_genre.png "Popularity Score per Genre")
-![gross_revenue_per_genre](./images/gross_revenue_per_genre.png)
+
 <br>
 ![alt text](/img/movie-success-analysis/gross_revenue_per_genre.png "Gross Revenue per Genre")
-<br>
-The worldwide gross revenue typically peaks in May, July and November, potentially due to school holiday and the "Academy Awards" effect - studios release their movies two or three months before the Awards in order to be eligible for the nomination. 
 
+<br>
+
+The worldwide gross revenue typically peaks in May, July and November, potentially due to school holiday and the "Academy Awards" effect - studios release their movies two or three months before the Awards in order to be eligible for the nomination. 
 
 ![alt text](/img/movie-success-analysis/average_gross_revenue_by_month.png "Average Gross Revenue by Month")
 
