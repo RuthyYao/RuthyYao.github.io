@@ -27,7 +27,7 @@ The project uses descriptive analysis, including description of the average popu
 Based on the average popularity socre of each genre and the aerage worldwide gross revenue of each genre, the most popular and the best performing genres are Animation, Sci-fi and Adventure.
 
 <br>
-![alt text](/img/movie-success-analysis/popularity_score_per_genre.png width="400" height="300")
+![alt text](/img/movie-success-analysis/popularity_score_per_genre.png)
 
 <br>
 ![alt text](/img/movie-success-analysis/gross_revenue_per_genre.png "Gross Revenue per Genre")
