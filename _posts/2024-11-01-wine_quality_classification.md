@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Predict the High-quality wines using ML
-image: "/wine-quality-class/front_image.png"
+image: "/wine-quality-class/front_image.PNG"
 tags: [EDA, Predictive Analysis, Machine Learning, Python]
 ---
 
