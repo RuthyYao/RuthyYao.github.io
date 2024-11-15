@@ -38,7 +38,7 @@ The final model using Random Forest algorithms achieve a prediction accuracy of 
 The ranking of the 11 parameters based on their significance to the quality classification is as following.
 
 
-![alt text](/img/wine-quality-predict/feature_importance_random.png)
+![alt text](/img/wine-quality-class/feature_importance_random.png)
 
 
 For the top five parameters, the desirable value range based on where the most data lies are: 
