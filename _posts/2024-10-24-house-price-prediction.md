@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Develop a House Price Prediction Tool
-image: "/house-price-predict/front__img.PNG"
+image: "/house-price-predict/front_img.PNG"
 tags: [Predictive Analysis, Regression, Python]
 ---
 
