@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Customer Acquisition and Conversion Analysis
+title: Unlock the Customer Insights of a Streaming Business
 image: "/posts/foodie-fi.png"
-tags: [Customer Acquisition and Retention, Exploratory Analysis, SQL]
+tags: [Customer Acquisition and Retention, Data Extraction and Manipulation, SQL]
 ---
 
 Foodie Fi, a streaming service provider, wants to utilise data-driven analysis to inform the investment decisions on products and customers to drive business growth!
