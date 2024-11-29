@@ -30,31 +30,46 @@ Clique Bait has established the e-commerce channel dive months ago. The manageme
 ### Actions <a name="overview-actions"></a>
 I first compiled the necessary data from five datasets that provided the customer data, page visits and campaigns information.
 
-Based on the business requirement, I splited the analysis task into three parts:
+Based on the business requirement, I split the analysis task into three parts:
 
  - **Part 1 - Digital Analysis**  - to extract insights on the customer visits, page views and purchases.
- - **Part 2 - Product Funnel** - create a product funnel to analyse the add-to-cart rate nad purchase rate.
+ - **Part 2 - Product Funnel** - create a product funnel to analyse the add-to-cart rate and purchase rate.
  - **Part 3 - Campaign Analysis** - to evaluate the success of each campaign.
    
 For each part of the analysis, I used SQL for data extraction and manipulation, gaining the insights on online store conversions, top performing products and the most effective campaigns.  
 
 ### Results <a name="overview-results"></a>
-Clique Bait has acquired 500 customers over the last four to five months. On avereage each customer visits the online store for 7.1 times over five-months period. The purchase rate is ~50%. The average add-to-cart rate is 61% and the conversion from add-to-cart to purchase is ~76%. About 15.5% of time customers visit the checkout page but didn't maake a purchase.
+Clique Bait has acquired 500 customers over the last four to five months. On average each customer visits the online store for 7.1 times over five-months period. The purchase rate is ~50%. The average add-to-cart rate is 61% and the conversion from add-to-cart to purchase is ~76%. About 15.5% of time customers visit the checkout page but didn't make a purchase.
 
-The most purchased product is lobster which also has the highest view-to-purchase conversion rate. The top 3 visited pages are Oyster, Crab followed by Russian Caviar. Ironically,  Russian Caviar is the most likely to be abandoned product(add to cart but not purchased) with an abandoned rate of 26%. 
+The most purchased product is lobster which also has the highest view-to-purchase conversion rate. The top 3 visited pages are Oyster, Crab followed by Russian Caviar. Ironically, Russian Caviar is also the most likely to be abandoned product (add to cart but not purchased) with an abandoned rate of 26%. 
 
-Campaigns had substaintially boosted the page views. From January to March, Clique Bait run three campaign, resulting in page view reaching above 800 mark. In contrast, during April and May when there isn't any campaigns, the page visits drop to 200. Compare the customer who receive the campaign ad impression with those who didn't receive the impression, the prucase of is substaintially higher for the former - 89% vs the latter 28%, which proves that campaigns effectively drive the sales. 
+Campaigns had substantially boosted the page views. From January to March, Clique Bait run three campaigns, resulting in page view reaching above 800 marks. In contrast, during April and May when there aren’t any campaigns, the page visits dropped to 200. Compare the customers who receive the campaign ad impression with those who didn't receive the impression, the purchase rate was substantially higher for the former - 89% vs the latter 28%, which proved that campaigns effectively drive the sales. 
 
-Of the three campaigns, "half-price" promotion achieve the highest impression-to-purchase conversion rate 85.3% followed by "Buy-one-get-one-free" achieved 84.6%. 
+Of the three campaigns, "half-price" promotion achieves the highest impression-to-purchase conversion rate - 85.3% followed by "Buy-one-get-one-free" achieved 84.6%. 
+
 
 ### Insights & Recommendations <a name="overview-insights-recommendations"></a>
 
-To drive the sales performance, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally make the purchase. In this aspect, the management should keep an eye on the the customers who visit the checkout page but didn't make ppurchases. It is recommended that we collect further insights on what caused the customers drop the basket. 
+To boost the sales growth, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally making the purchase. In this aspect, the management should keep an eye on the customers who visit the checkout page but didn't make purchases. It is recommended that we collect further information to understand what caused the customers drop the basket. 
+
+The management team could consider optimize the campigns to driver further sales uplift. Based on the sales and click-view performance of the previous three campaigns, "Half-Price" and "Buy-one-get-one-free" are the most effective. Management team could consider extend the reach of those campaigns in future if the budget permits. Suggest do further customer behaviours analysis to identify what types of customers are more likely to click the ad so we can target the customers to run the promotion to driver better outcome.
+
+The analysis shows that Oyster and Crab are the most purchased products. The management team could leverage the data insights to plan the purchase and stocking. Luxury category reveals very distinctive shopping behaviours - high views but low conversion. The management team could consider implement some limited-time promotions such as flash sales to generate excitement, drive sales and this could also help clear out excessive stocks.
+
+### Growth/Next Steps <a name="overview-growth"></a>
+
+* To drive the conversion rate up, we could test different promotional strategies and track the change of the product funnel conversion and fallout rate. 
+
+* We could also collect external data to establish a benchmark for the key metrics to help us better gauge our performance. 
+
+* Further analysis on customers visits and shopping basket to segment the customers and develop more customerized campaigns and promotions.
 
 
-To support the management team to monitor the business performance ongoingly, I would leverage the data insights to build a dahsboard that allows us to track the key metrics over time. Specifically, I would call out the following KPIs:
-* **Monthly Revenue Growth** - how does the business grow their revenue monty-over-month.
-* **Total subscribers** - how many customers the business has in total at a point. This reflects the reach and popularity of Foodie Fi.
-* **The customer growth** - how customers increase month-over-month. THis reveals the momentum of the expansion of their customer base.
-* **Conversion rate** - how many customers stay in Foodie Fi after the trial. Howe does the rate look like.
-* **Churn rate** - how many customers cancel their plan each month?  This signals customer dissatisfaction and can help pinpoint areas for improvements in suer expereince, pricing or content library etc.
+# Data Overview  <a name="data-overview"></a>
+
+Entity Relationship Diagram:
+
+<img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/clique-bait/case-study-6-erd.PNG">
+
+<br>
+![alt text](/img/clique-bait/case-study-6-erd.PNG "Entity Relationship Diagram")
