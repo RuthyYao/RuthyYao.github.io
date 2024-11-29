@@ -36,14 +36,22 @@ Based on the business requirement, I splited the analysis task into three parts:
  - **Part 2 - Product Funnel** - create a product funnel to analyse the add-to-cart rate nad purchase rate.
  - **Part 3 - Campaign Analysis** - to evaluate the success of each campaign.
    
-For each part of the analysis, I used SQL for data extraction and manipulation, gaining the insights on customer behaviours, online store conversions and top performing products.  
+For each part of the analysis, I used SQL for data extraction and manipulation, gaining the insights on online store conversions, top performing products and the most effective campaigns.  
 
 ### Results <a name="overview-results"></a>
 Clique Bait has acquired 500 customers over the last four to five months. On avereage each customer visits the online store for 7.1 times over five-months period. The purchase rate is ~50%. The average add-to-cart rate is 61% and the conversion from add-to-cart to purchase is ~76%. About 15.5% of time customers visit the checkout page but didn't maake a purchase.
 
 The most purchased product is lobster which also has the highest view-to-purchase conversion rate. The top 3 visited pages are Oyster, Crab followed by Russian Caviar. Ironically,  Russian Caviar is the most likely to be abandoned product(add to cart but not purchased) with an abandoned rate of 26%. 
 
+Campaigns had substaintially boosted the page views. From January to March, Clique Bait run three campaign, resulting in page view reaching above 800 mark. In contrast, during April and May when there isn't any campaigns, the page visits drop to 200. Compare the customer who receive the campaign ad impression with those who didn't receive the impression, the prucase of is substaintially higher for the former - 89% vs the latter 28%, which proves that campaigns effectively drive the sales. 
+
+Of the three campaigns, "half-price" promotion achieve the highest impression-to-purchase conversion rate 85.3% followed by "Buy-one-get-one-free" achieved 84.6%. 
+
 ### Insights & Recommendations <a name="overview-insights-recommendations"></a>
+
+To drive the sales performance, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally make the purchase. In this aspect, the management should keep an eye on the the customers who visit the checkout page but didn't make ppurchases. It is recommended that we collect further insights on what caused the customers drop the basket. 
+
+
 To support the management team to monitor the business performance ongoingly, I would leverage the data insights to build a dahsboard that allows us to track the key metrics over time. Specifically, I would call out the following KPIs:
 * **Monthly Revenue Growth** - how does the business grow their revenue monty-over-month.
 * **Total subscribers** - how many customers the business has in total at a point. This reflects the reach and popularity of Foodie Fi.
