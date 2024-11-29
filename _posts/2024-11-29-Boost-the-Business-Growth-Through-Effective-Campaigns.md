@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Boost the Business Growth Through Effective Campaigns
-image: "/clique bait/6.png"
+image: "/clique-bait/6.png"
 tags: [digital analysis, product funnel, campaign analysis, SQL]
 ---
 
