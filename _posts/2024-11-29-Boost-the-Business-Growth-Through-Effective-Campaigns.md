@@ -518,15 +518,16 @@ SELECT
     COUNT(e.visit_id) AS abandoned
 FROM events AS e 
 LEFT JOIN page_hierarchy AS p
-	ON p.page_id = e.page_id
+    ON p.page_id = e.page_id
 WHERE e.event_type = 2  -- 1st layer - products are add to cart.
 AND e.visit_id NOT IN 
-	(SELECT
-		visit_id
+	(
+	SELECT
+        	visit_id
 	FROM events
-    WHERE event_type = 3) -- 2nd layer - products NOT purchased.
-GROUP BY p.product_category
-),
+    	WHERE event_type = 3) -- 2nd layer - products NOT purchased.
+	GROUP BY p.product_category
+	),
 cat_purchased AS(
 SELECT
     p.product_category,
@@ -543,7 +544,7 @@ AND e.visit_id IN
 GROUP BY p.product_category
 )
 SELECT
-	cv.*,
+    cv.*,
     ca.abandoned,
     cp.purchases
 FROM cat_view AS cv
@@ -567,7 +568,7 @@ FROM category_summary;
 #### Convert the value in the above table to percentage.
 ```
 SELECT
-	product_category,
+    product_category,
     ROUND(100*views/views,1) AS views,
     ROUND(100*add_to_cart/views,1) AS add_to_cart_rate,
     ROUND(100*purchases/views,1) AS purchase_rate,
@@ -584,7 +585,7 @@ FROM category_summary;
 Luxury products has higher fallout rate than the other two categories.
 
 ### 1. Which product had the most views, cart adds and purchases?
-```SQL
+```
 SELECT
 	(SELECT page_name FROM product_summary ORDER BY views DESC LIMIT 1) AS most_view,
 	(SELECT page_name FROM product_summary ORDER BY add_to_cart DESC LIMIT 1) AS most_add_to_cart,
