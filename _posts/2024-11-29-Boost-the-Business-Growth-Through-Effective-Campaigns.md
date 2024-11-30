@@ -105,6 +105,9 @@ FROM users;
 | -------------- |
 | 500            |
 
+| customer_count |
+|----------------|
+| 500            |
 
 
 ### 2. What is the unique number of visits by all users per month?
@@ -123,3 +126,24 @@ GROUP BY period;
 | 2020-03 | 916    |
 | 2020-04 | 248    |
 | 2020-05 | 36     |
+
+### 3. What is the number of events for each event type?
+
+```SQL
+SELECT
+	e.event_type,
+    ei.event_name,
+    COUNT(DISTINCT visit_id) AS event_count
+FROM events AS e
+LEFT JOIN event_Identifier AS ei
+	ON e.event_type = ei.event_type
+GROUP BY e.event_type, ei.event_name;
+```
+| event_type | event_name    | event_count |
+|------------|---------------|-------------|
+| 1          | Page View     | 3564        |
+| 2          | Add to Cart   | 2510        |
+| 3          | Purchase      | 1777        |
+| 4          | Ad Impression | 876         |
+| 5          | Ad Click      | 702         |
+
