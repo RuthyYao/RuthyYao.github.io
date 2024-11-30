@@ -690,8 +690,206 @@ SELECT * FROM campaign_summary LIMIT 10;
 | 2       | 0635fb   | 2020-02-16 06:42:43 | 9          | 4         | 1        | Half Off - Treat Your Shellf(ish) | 0          | 0     | Salmon,Kingfish,Abalone,Crab                                         |
 | 2       | 1f1198   | 2020-02-01 21:51:55 | 1          | 0         | 0        | Half Off - Treat Your Shellf(ish) | 0          | 0     | null                                                                 |
 
+Further investigation to generate additional insights about the campaign effectiveness.
+Some thoughts around comparing the key metrics between customers who received the ad impression vs customers who didn't receive the ad impression. 
+
+* I'll create two customer groups:
+	* Group 1: Received impression.
+	* Group 2: Didn't receive impression.
+* Under Group 1, create two sub-groups:
+  	* Sub-group 1: received impressions and also click the impressions.
+  	* Sub-group 2: received impressions but didn't click the impressions.
+* Create a performance metrics for each group and compare metrics between the customer groups.
+
+ 	-> Performance metrics includes the page_views per user, page_views per visit, average number of products add to cart, purchase rate. 
+
+#### Customer Group 1 - Received impression (impression > 0)
+
+The number of customer and the visit count in this group.
+```SQL
+SELECT 
+	COUNT(DISTINCT user_id) AS users_count,
+    COUNT(DISTINCT visit_id) AS visits
+FROM campaign_summary
+WHERE campaign_name IS NOT NULL
+	AND impression > 0;
+```
+
+| users_count | visits |
+|-------------|--------|
+| 417         | 747    |
 
 
+Calculate the key performance metrics for this user group.
+```SQL
+SET @received_and_clicked_users = 367;
+SET @received_and_clicked_visits = 599;
+
+SELECT 
+    SUM(page_views) / @received_and_clicked_users AS page_views_per_user,
+    SUM(page_views) / @received_and_clicked_visits AS page_views_per_visit,
+    AVG(cart_adds) AS cart_adds_per_visit,
+    ROUND(AVG(purchase)*100,1) AS purchase_rate
+FROM campaign_summary
+WHERE campaign_name IS NOT NULL
+	AND impression > 0
+    AND click > 0;
+```
+
+| page_views_per_user | page_views_per_visit | cart_adds_per_visit | purchase_rate |
+|---------------------|----------------------|---------------------|---------------|
+| 15.3213             | 8.5529               | 5.0482              | 85.0          |
+
+#### Customer Sub-group 1 - Received impressions and clicked the impression (impression > 0 AND click > 0)
+ The number of customers and visits in this group.
+ ```SQL
+ SELECT 
+	COUNT(DISTINCT user_id) AS users_count,
+    	COUNT(DISTINCT visit_id) AS visits
+FROM campaign_summary
+WHERE campaign_name IS NOT NULL
+	AND impression > 0
+    	AND click > 0;
+```
+
+| users_count | visits |
+|-------------|--------|
+| 367         | 599    |
+
+The performance metrics of this customer group.
+```SQL
+SET @received_and_clicked_users = 367;
+SET @received_and_clicked_visits = 599;
+
+SELECT 
+    SUM(page_views) / @received_and_clicked_users AS page_views_per_user,
+    SUM(page_views) / @received_and_clicked_visits AS page_views_per_visit,
+    AVG(cart_adds) AS cart_adds_per_visit,
+    ROUND(AVG(purchase)*100,1) AS purchase_rate
+FROM campaign_summary
+WHERE campaign_name IS NOT NULL
+ 	AND impression > 0
+    	AND click > 0;
+```
+
+| page_views_per_user | page_views_per_visit | cart_adds_per_visit | purchase_rate |
+|---------------------|----------------------|---------------------|---------------|
+| 14.8038             | 9.0701               | 5.7162              | 89.6          |
+
+
+
+#### Customer Sub-group 2 - Received impressions but didn't click the impression
+ The number of customers and visits in this group.
+
+```SQL
+Solution structure:
+    -- use subquery to define the user group who received and click the impression.
+    -- users who are not in the above group are those who received but not clicked the impression.
+ SELECT 
+	COUNT(DISTINCT user_id) AS users_count,
+    	COUNT(DISTINCT visit_id) AS visits
+FROM campaign_summary
+WHERE campaign_name IS NOT NULL
+	AND impression > 0
+    	AND user_id NOT IN
+    (
+    SELECT
+	user_id
+	FROM campaign_summary 
+    WHERE campaign_name IS NOT NULL
+	AND impression > 0
+        AND click > 0);
+```
+
+| users_count | visits |
+|-------------|--------|
+| 50          | 61     |
+
+
+The performance metrics for this customer group.
+```SQL
+SET @received_not_clicked_users = 50;
+SET @received_not_clicked_visits = 61;
+
+SELECT 
+    SUM(page_views) / @received_not_clicked_users AS page_views_per_user,
+    SUM(page_views) / @received_not_clicked_visits AS page_views_per_visit,
+    AVG(cart_adds) AS cart_adds_per_visit,
+    ROUND(AVG(purchase)*100,1) AS purchase_rate
+FROM campaign_summary
+WHERE campaign_name IS NOT NULL
+    AND impression > 0
+    AND user_id NOT IN
+    (
+    SELECT
+        user_id
+	FROM campaign_summary 
+    WHERE campaign_name IS NOT NULL
+	AND impression > 0
+        AND click > 0);
+```
+
+| page_views_per_user | page_views_per_visit | cart_adds_per_visit | purchase_rate |
+|---------------------|----------------------|---------------------|---------------|
+| 7.6200              | 6.2459               | 2.2295              | 65.6          |
+
+
+#### Customer Group 2 - didn't receive impressions
+
+The number of customers in this group.
+```SQL
+solution structure:
+-- Note: We can't use impression = 0 as the condition to filter the data as a user could have visited the website for twice during the campaign but recieved the impression only once. In this case, when you count the users using the condition of impression is 0, this customer will be counted in which is incorrect.
+-- The right way is to use subquery to create a group who received impression; users who do not fall into this group will be the group who didn't receive impressions.
+
+SELECT 
+      COUNT(DISTINCT user_id) AS users_count,	  
+      COUNT(DISTINCT visit_id) AS visits
+FROM campaign_summary
+WHERE campaign_name IS NOT NULL
+      AND user_id NOT IN
+    (
+    SELECT
+	user_id 
+	FROM campaign_summary
+    WHERE impression > 0
+	AND campaign_name IS NOT NULL
+    );
+```
+
+| users_count | visits |
+|-------------|--------|
+| 78          | 368    |
+
+
+The performance metrics for this customer group.
+```SQL
+SET @not_received_users = 56;
+SET @not_received_visits = 268;
+
+SELECT 
+    SUM(page_views) / @not_received_users AS page_views_per_user,
+    SUM(page_views) / @not_received_visits AS page_views_per_visit,
+    AVG(cart_adds) AS cart_adds,
+    ROUND(AVG(purchase)*100,1) AS purchase_rate
+FROM campaign_summary
+WHERE campaign_name IS NOT NULL
+	AND user_id NOT IN
+    (
+    SELECT
+	user_id 
+	FROM campaign_summary
+    WHERE impression > 0
+	AND campaign_name IS NOT NULL
+    );
+```
+
+| page_views_per_user | page_views_per_visit | cart_adds | purchase_rate |
+|---------------------|----------------------|-----------|---------------|
+| 26.4821             | 5.5336               | 1.1848    | 27.2          |
+
+
+Now put all the four customer groups together.
 
 
 
