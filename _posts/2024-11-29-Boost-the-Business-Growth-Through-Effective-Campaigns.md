@@ -463,3 +463,116 @@ fROM product_summary;
 | 9          | Oyster         | Shellfish        | 1568  | 943         | 217       | 726       |
 
 
+#### Convert the value in the above table to percentage.
+```SQL
+SELECT
+    page_name,
+    product_category,
+    ROUND(100*views/views,1) AS views,
+    ROUND(100*add_to_cart/views,1) AS add_to_cart_rate,
+    ROUND(100*purchases/views,1) AS purchase_rate,
+    ROUND(100*abandoned/views,1) AS fallout_rate
+FROM product_summary
+ORDER BY fallout_rate DESC;
+```
+
+| page_name    | product_category | views | add_to_cart_rate | purchase_rate | fallout_rate |
+|----------------|------------------|-------|------------------|---------------|--------------|
+| Russian Caviar | Luxury           | 100.0 | 60.5             | 44.6          | 15.9         |
+| Tuna           | Fish             | 100.0 | 61.5             | 46.0          | 15.4         |
+| Abalone        | Shellfish        | 100.0 | 61.1             | 45.8          | 15.3         |
+| Black Truffle  | Luxury           | 100.0 | 62.9             | 48.1          | 14.8         |
+| Crab           | Shellfish        | 100.0 | 60.7             | 46.0          | 14.7         |
+| Salmon         | Fish             | 100.0 | 60.2             | 45.6          | 14.6         |
+| Lobster        | Shellfish        | 100.0 | 62.6             | 48.7          | 13.8         |
+| Oyster         | Shellfish        | 100.0 | 60.1             | 46.3          | 13.8         |
+| Kingfish       | Fish             | 100.0 | 59.0             | 45.3          | 13.7         |
+
+#### Further aggregate the data to create a funnel at the product category level.
+```SQL
+CREATE TABLE category_summary
+WITH cat_view AS (
+SELECT 
+    p.product_category,
+    SUM(CASE WHEN e.event_type = 1 THEN 1 ELSE 0 END) AS views,
+    SUM(CASE WHEN e.event_type = 2 THEN 1 ELSE 0 END) AS add_to_cart
+FROM events AS e
+LEFT JOIN page_hierarchy as p
+	ON e.page_id = p.page_id
+WHERE p.product_id IS NOT NULL
+GROUP BY  p.product_category
+),
+cat_abandon AS(
+SELECT
+    p.product_category,
+    COUNT(e.visit_id) AS abandoned
+FROM events AS e 
+LEFT JOIN page_hierarchy AS p
+	ON p.page_id = e.page_id
+WHERE e.event_type = 2  -- 1st layer - products are add to cart.
+AND e.visit_id NOT IN 
+	(SELECT
+		visit_id
+	FROM events
+    WHERE event_type = 3) -- 2nd layer - products NOT purchased.
+GROUP BY p.product_category
+),
+cat_purchased AS(
+SELECT
+    p.product_category,
+    COUNT(e.visit_id) AS purchases
+FROM events AS e 
+LEFT JOIN page_hierarchy AS p
+	ON p.page_id = e.page_id
+WHERE e.event_type = 2  -- 1st layer - products are add to cart.
+AND e.visit_id IN 
+	(SELECT
+		visit_id
+	FROM events
+    WHERE event_type = 3) -- 2nd layer - products are purchased.
+GROUP BY p.product_category
+)
+SELECT
+	cv.*,
+    ca.abandoned,
+    cp.purchases
+FROM cat_view AS cv
+LEFT JOIN cat_abandon AS ca
+	ON cv.product_category = ca.product_category
+LEFT JOIN cat_purchased AS cp
+	ON cv.product_category = cp.product_category
+;
+
+SELECT
+	*
+FROM category_summary;
+```
+
+| product_category | views | add_to_cart | abandoned | purchases |
+|------------------|-------|-------------|-----------|-----------|
+| Luxury           | 3032  | 1870        | 466       | 1404      |
+| Shellfish        | 6204  | 3792        | 894       | 2898      |
+| Fish             | 4633  | 2789        | 674       | 2115      |
+
+#### Convert the value in the above table to percentage.
+```SQL
+SELECT
+	product_category,
+    ROUND(100*views/views,1) AS views,
+    ROUND(100*add_to_cart/views,1) AS add_to_cart_rate,
+    ROUND(100*purchases/views,1) AS purchase_rate,
+    ROUND(100*abandoned/views,1) AS fallout_rate
+FROM category_summary;
+```
+
+| product_category | views | add_to_cart_rate | purchase_rate | fallout_rate |
+|------------------|-------|------------------|---------------|--------------|
+| Luxury           | 100.0 | 61.7             | 46.3          | 15.4         |
+| Shellfish        | 100.0 | 61.1             | 46.7          | 14.4         |
+| Fish             | 100.0 | 60.2             | 45.7          | 14.5         |
+
+Luxury products has higher fallout rate than the other two categories.
+
+
+
+
