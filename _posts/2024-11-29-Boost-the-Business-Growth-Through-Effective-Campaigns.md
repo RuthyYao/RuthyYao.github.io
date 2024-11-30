@@ -96,7 +96,8 @@ Finally, the "campaign identifier" table provide the three campaigns's start dat
 ## Part 1 - Digital Analysis <a name="digital-analysis"></a>
 
 ### 1. Calculate total number of customers.
-```SQL
+
+```
 SELECT 
 	COUNT(DISTINCT user_id) AS customer_count
 FROM users;
@@ -108,7 +109,8 @@ FROM users;
 
 
 ### 2. What is the unique number of visits by all users per month?
-```SQL
+
+```
 SELECT 
 	DATE_FORMAT(event_time,'%Y-%m') As period,
     COUNT(DISTINCT visit_id) AS visits
@@ -126,7 +128,7 @@ GROUP BY period;
 
 ### 3. What is the number of events for each event type?
 
-```SQL
+```
 SELECT
 	e.event_type,
     ei.event_name,
@@ -145,7 +147,8 @@ GROUP BY e.event_type, ei.event_name;
 | 5          | Ad Click      | 702         |
 
 ### 4. Breakdown the number of events by months
-```SQL
+
+```
 WITH event_count AS(
 SELECT
 	DISTINCT DATE_FORMAT(e.event_time, '%Y-%m') AS period,
@@ -181,7 +184,8 @@ Jan to March has more website activities than April and May. This was because Cl
 
 
 ### 5. What is the percentage of visits which have a purchase event?
-```SQL
+
+```
 SELECT
 	ROUND(COUNT(DISTINCT visit_id) * 100 / (SELECT COUNT(DISTINCT visit_id) FROM events),1) AS purchase_percentage
 FROM events AS e
@@ -197,7 +201,8 @@ WHERE event_name = 'Purchase';
 About half of the visits lead to a purchase. 
 
 ### 6. What is the percentage of visits which view the checkout page but do not have a purchase event?
-```SQL
+
+```
 WITH cte AS(
 SELECT 
 	COUNT(DISTINCT e.visit_id) AS checkout_page_visits
@@ -224,7 +229,8 @@ WHERE ei.event_name = 'Purchase';
 15.5% of the visits abandoned the checkout.
 
 ### 7. What are the top 3 product pages by number of views?
-```SQL
+
+```
 SELECT
     p.page_name,
     COUNT(e.visit_id) AS num_views
@@ -246,7 +252,8 @@ LIMIT 3;
 
 
 ### 8. What is the number of views and cart adds for each product category?
-```SQL
+
+```
 SELECT
 	p.product_category,
     SUM(CASE WHEN event_type = 1 THEN 1 ELSE 0 END) AS num_views,
@@ -266,7 +273,8 @@ GROUP BY p.product_category;
 
 
 ### 9. What are the top 3 products by purchases?
-```SQL
+
+```
 -- Solution structure: 
 	-- Purchased products are those which are add to the cart in the product page AND are purchased in the confirmation page.
     	-- Hence break down the question into two layers:
@@ -299,7 +307,7 @@ LIMIT 3;
 
 
 ### 10. How many times did each customer visit the online store averagely? And what is the customer number distribution by visits?
-```SQL
+```
 WITH visit_cte AS(
 SELECT 
 	users.user_id,
@@ -320,7 +328,7 @@ FROM visit_cte;
 
 On average, customers visited the store 7.1 times over the five-months period.
 
-```SQL
+```
 WITH visit_cte AS(
 SELECT 
 	users.user_id,
@@ -347,7 +355,7 @@ GROUP BY visits;
 | 12             | 27             |
 
 ### 11. How many purchases did each customer make averagely?
-```SQL
+```
 WITH purchase_cte AS(
 SELECT 
 	users.user_id,
@@ -385,6 +393,7 @@ I'll create a new output table that contains the following details.
     -- JOIN the above three CTEs using product_id, product_name and product_category of each product
     -- Store the result in a temporary table product_summary for further analysis
 
+```
 CREATE TABLE product_summary
 WITH prod_view AS (
 SELECT 
@@ -464,7 +473,7 @@ fROM product_summary;
 
 
 #### Convert the value in the above table to percentage.
-```SQL
+```
 SELECT
     page_name,
     product_category,
@@ -555,7 +564,7 @@ FROM category_summary;
 | Fish             | 4633  | 2789        | 674       | 2115      |
 
 #### Convert the value in the above table to percentage.
-```SQL
+```
 SELECT
 	product_category,
     ROUND(100*views/views,1) AS views,
@@ -587,7 +596,7 @@ SELECT
 
    
 ### 2. Which product was most likely to be abandoned?
-```SQL
+```
 SELECT
 	*
 FROM product_summary
@@ -614,7 +623,7 @@ LIMIT 1;
 | Lobster   | 48.74           |
 
 ### 4.  What is the average conversion rate from view to cart add?
-```SQL
+```
 SELECT 
     ROUND(100*AVG(add_to_cart / views),2) AS conversion_rate
 FROM product_summary;
@@ -625,7 +634,7 @@ FROM product_summary;
 | 60.95           |
 
 ### 5.What is the average conversion rate from cart add to purchase?
-```SQL
+```
 SELECT 
     ROUND(100*AVG(purchases / add_to_cart),2) AS conversion_rate
 FROM product_summary;
@@ -650,7 +659,7 @@ I'll create a new output table that contains the following details:
 * click: count of ad clicks for each visit
 * cart_products: a comma separated text value with products added to the cart sorted by the order they were added to the cart (hint: use the sequence_number)
 
-```SQL
+```
 CREATE TABLE campaign_summary
 SELECT
 	users.user_id,
@@ -705,7 +714,8 @@ To evaluate the effectiveness of the campaigns, let's comparing the key metrics 
 #### Customer Group 1 - Received impression (impression > 0)
 
 The number of customer and the visit count in this group.
-```SQL
+
+```
 SELECT 
 	COUNT(DISTINCT user_id) AS users_count,
     COUNT(DISTINCT visit_id) AS visits
@@ -720,7 +730,8 @@ WHERE campaign_name IS NOT NULL
 
 
 Calculate the key performance metrics for this user group.
-```SQL
+
+```
 SET @received_and_clicked_users = 367;
 SET @received_and_clicked_visits = 599;
 
@@ -741,7 +752,7 @@ WHERE campaign_name IS NOT NULL
 
 #### Customer Sub-group 1 - Received impressions and clicked the impression (impression > 0 AND click > 0)
  The number of customers and visits in this group.
- ```SQL
+ ```
  SELECT 
 	COUNT(DISTINCT user_id) AS users_count,
     	COUNT(DISTINCT visit_id) AS visits
@@ -756,7 +767,7 @@ WHERE campaign_name IS NOT NULL
 | 367         | 599    |
 
 The performance metrics of this customer group.
-```SQL
+```
 SET @received_and_clicked_users = 367;
 SET @received_and_clicked_visits = 599;
 
@@ -780,7 +791,7 @@ WHERE campaign_name IS NOT NULL
 #### Customer Sub-group 2 - Received impressions but didn't click the impression
  The number of customers and visits in this group.
 
-```SQL
+```
 Solution structure:
     -- use subquery to define the user group who received and click the impression.
     -- users who are not in the above group are those who received but not clicked the impression.
@@ -806,7 +817,7 @@ WHERE campaign_name IS NOT NULL
 
 
 The performance metrics for this customer group.
-```SQL
+```
 SET @received_not_clicked_users = 50;
 SET @received_not_clicked_visits = 61;
 
@@ -836,7 +847,7 @@ WHERE campaign_name IS NOT NULL
 #### Customer Group 2 - didn't receive impressions
 
 The number of customers in this group.
-```SQL
+```
 solution structure:
 -- Note: We can't use impression = 0 as the condition to filter the data as a user could have visited the website for twice during the campaign but recieved the impression only once. In this case, when you count the users using the condition of impression is 0, this customer will be counted in which is incorrect.
 -- The right way is to use subquery to create a group who received impression; users who do not fall into this group will be the group who didn't receive impressions.
@@ -862,7 +873,8 @@ WHERE campaign_name IS NOT NULL
 
 
 The performance metrics for this customer group.
-```SQL
+
+```
 SET @not_received_users = 56;
 SET @not_received_visits = 268;
 
@@ -904,7 +916,8 @@ Customers who received the promotions visited more pages in each visit than cust
 Those who click the ad displayed higher page views, cart-add and purchases than those who didn't click the ad. Also note 88% of the users who received the promotion clicked the promotion ad with only 12% didn't click. This also shows that promotions did draw the attention of the customers. 
 
 Finally, Let's compare the performance between the three campaigns.
-```SQL
+
+```
 WITH campaign_performance AS(
 SELECT
     campaign_name,
