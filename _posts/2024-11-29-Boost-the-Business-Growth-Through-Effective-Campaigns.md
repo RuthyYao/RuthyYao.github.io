@@ -147,3 +147,55 @@ GROUP BY e.event_type, ei.event_name;
 | 4          | Ad Impression | 876         |
 | 5          | Ad Click      | 702         |
 
+### 4. Breakdown the number of events by months
+```SQL
+WITH event_count AS(
+SELECT
+	DISTINCT DATE_FORMAT(e.event_time, '%Y-%m') AS period,
+    e.event_type,
+    ei.event_name,
+    COUNT(DISTINCT visit_id)  AS event_count
+FROM events AS e
+LEFT JOIN event_Identifier AS ei
+	ON e.event_type = ei.event_type
+GROUP BY period, e.event_type, ei.event_name
+ORDER BY period, e.event_type, ei.event_name
+)
+SELECT
+	period,
+    MAX(CASE WHEN event_name = 'Page View' THEN event_count ELSE 0 END) AS page_view,
+	MAX(CASE WHEN event_name = 'Add to Cart' THEN event_count ELSE 0 END) AS add_to_cart,   
+    MAX(CASE WHEN event_name = 'Purchase' THEN event_count ELSE 0 END) AS purchase,   
+    MAX(CASE WHEN event_name = 'Ad Impression' THEN event_count ELSE 0 END) AS impression,   
+    MAX(CASE WHEN event_name = 'Ad Click' THEN event_count ELSE 0 END) AS clicks
+FROM event_count
+GROUP BY period;
+```
+| period  | page_view | add_to_cart | purchase | impression | clicks |
+|---------|-----------|-------------|----------|------------|--------|
+| 2020-01 | 876       | 614         | 430      | 216        | 173    |
+| 2020-02 | 1488      | 1054        | 744      | 371        | 291    |
+| 2020-03 | 916       | 635         | 448      | 214        | 178    |
+| 2020-04 | 248       | 177         | 134      | 63         | 48     |
+| 2020-05 | 36        | 30          | 21       | 12         | 12     |
+
+Jan to March has more website activities than April and May. This was because Clique Bait run three campaigns in Q1. 
+
+
+### 5. What is the percentage of visits which have a purchase event?
+```SQL
+SELECT
+	ROUND(COUNT(DISTINCT visit_id) * 100 / (SELECT COUNT(DISTINCT visit_id) FROM events),1) AS purchase_percentage
+FROM events AS e
+LEFT JOIN event_Identifier AS ei
+	ON e.event_type = ei.event_type
+WHERE event_name = 'Purchase';
+```
+| purchase_percentage |
+|---------------------|
+| 49.9                |
+
+About half of the visits lead to a purchase. 
+
+
+
