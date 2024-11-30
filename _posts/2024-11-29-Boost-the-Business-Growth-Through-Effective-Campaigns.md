@@ -264,5 +264,60 @@ GROUP BY p.product_category;
 | Fish             | 4633      | 2789         |
 
 
+### 9. What are the top 3 products by purchases?
+```SQL
+-- Solution structure: 
+	-- Purchased products are those which are add to the cart in the product page AND are purchased in the confirmation page.
+    	-- Hence break down the question into two layers:
+		-- 1. products are add to cart.
+		-- 2. products are purchased (use subquery)
+
+SELECT
+    p.page_name,
+    p.product_category,
+    COUNT(e.visit_id) AS purchases
+FROM events AS e 
+LEFT JOIN page_hierarchy AS p
+	ON p.page_id = e.page_id
+WHERE e.event_type = 2  -- 1st layer - products are add to cart.
+AND e.visit_id IN 
+	(SELECT
+		visit_id
+	FROM events
+    WHERE event_type = 3) -- 2nd layer - products are purchased.
+GROUP BY p.product_id, p.page_name, p.product_category
+ORDER BY purchases DESC
+LIMIT 3;
+```
+
+| page_name | product_category | purchases |
+|-----------|------------------|-----------|
+| Lobster   | Shellfish        | 754       |
+| Oyster    | Shellfish        | 726       |
+| Crab      | Shellfish        | 719       |
+
+
+### 10. How many times did each customer visit the online store averagely?
+```SQL
+WITH visit_cte AS(
+SELECT 
+	users.user_id,
+    COUNT(DISTINCT events.visit_id) AS visits
+FROM users
+LEFT JOIN events
+	ON users.cookie_id = events.cookie_id
+GROUP BY users.user_id
+)
+SELECT
+	AVG(visits) AS avg_visits_per_customer
+FROM visit_cte;
+```
+
+| avg_visits_per_customer |
+|-------------------------|
+| 7.1280                  |
+
+On average, customers visit store 7.1 times.
+
 
 
