@@ -15,8 +15,11 @@ Clique Bait, an online seafood shop wants to gain detailed insights into their s
     - [Results](#overview-results)
     - [Insights & Recommendations](#overview-insights-recommendations)
     - [Growth/Next Steps](#overview-growth)
-- [01. Data Overview](#data-overview)
-- [02. Exploratory Analysis](#exploratory-analysis)
+- [01. Data Understanding](#data-understanding)
+- [02. Data Analysis](#Data-analysis)
+    - [Digital Analysis](#digital-analysis)
+    - [Product Funnel](#product-funnel)
+    - [Campaign Analysis](#campaign-analysis)
 - [03. Results & Application](#results-application)
 - [04. Growth & Next Steps](#growth-next-steps)
 
@@ -73,3 +76,50 @@ Entity Relationship Diagram:
 
 <br>
 ![alt text](/img/clique-bait/case-study-6-erd.PNG "Entity Relationship Diagram")
+<br>
+
+The original dataset have five data tables. The primary data table is "events" which is the raw data of the customer visits. It stores the visits id, the visti time, the page visited and the activities on the page. 
+
+<br>
+
+The "users" table stores the customers information including their user id and the cookies they have and the time each cookie generated. 
+<br>
+
+"Event_identifier"  and "Page Hierarchy" are mapping tables. The former provides the activities names for each event_id and the page name and the latter maps out the page_name and product hierarchy for each page id. Note that each product has a page Hence it has a unique page id and product id. 
+<br>
+
+Finally, the "campaign identifier" table provide the three campaigns's start date and end date and the products that the camppaign was on.
+
+
+# Data Analysis  <a name="data-analysis"></a>
+
+## Digital Analysis <a name="digital-analysis"></a>
+
+### 1. Calculate total number of customers.
+```SQL
+SELECT 
+	COUNT(DISTINCT user_id) AS customer_count
+FROM users;
+```
+| customer_count |
+| -------------- |
+| 500            |
+
+
+
+### 2. What is the unique number of visits by all users per month?
+```SQL
+SELECT 
+	DATE_FORMAT(event_time,'%Y-%m') As period,
+    COUNT(DISTINCT visit_id) AS visits
+FROM events
+GROUP BY period;
+```
+
+| period  | visits |
+|---------|--------|
+| 2020-01 | 876    |
+| 2020-02 | 1488   |
+| 2020-03 | 916    |
+| 2020-04 | 248    |
+| 2020-05 | 36     |
