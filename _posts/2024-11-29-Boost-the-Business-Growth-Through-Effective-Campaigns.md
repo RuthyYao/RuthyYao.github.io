@@ -892,5 +892,11 @@ WHERE campaign_name IS NOT NULL
 Now put all the four customer groups together.
 
 
+| **Customer Group**                     | **user_count** | **visits** | **page_views_per_user ** | **page_views_per_visit** | ** cart_adds** | ** purchase_rate** |
+|----------------------------------------|----------------|------------|--------------------------|--------------------------|----------------|--------------------|
+| Received impressions                   | 417            | 747        | 15.3213                  | 8.5529                   | 5.0482         | 85                 |
+| Received impressions and clicked       | 367            | 599        | 14.8038                  | 9.0701                   | 5.7162         | 89.6               |
+| Received impressions but didn't  click | 50             | 61         | 7.62                     | 6.2459                   | 2.2295         | 65.6               |
+| Didn't receive impressions             | 56             | 268        | 26.4821                  | 5.5336                   | 1.1848         | 27.2               |
 
 
