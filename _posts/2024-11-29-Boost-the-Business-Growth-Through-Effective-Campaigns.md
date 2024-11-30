@@ -573,6 +573,126 @@ FROM category_summary;
 
 Luxury products has higher fallout rate than the other two categories.
 
+### 1. Which product had the most views, cart adds and purchases?
+```SQL
+SELECT
+	(SELECT page_name FROM product_summary ORDER BY views DESC LIMIT 1) AS most_view,
+	(SELECT page_name FROM product_summary ORDER BY add_to_cart DESC LIMIT 1) AS most_add_to_cart,
+        (SELECT page_name FROM product_summary ORDER BY purchases DESC LIMIT 1) AS most_purchases;
+ ```
+
+| # most_view | most_add_to_cart | most_purchases |
+|-------------|------------------|----------------|
+| Oyster      | Lobster          | Lobster        |
+
+   
+### 2. Which product was most likely to be abandoned?
+```SQL
+SELECT
+	*
+FROM product_summary
+ORDER BY abandoned DESC
+LIMIT 1;
+```
+
+| # product_id | page_name      | product_category | views | add_to_cart | abandoned | purchases |
+|--------------|----------------|------------------|-------|-------------|-----------|-----------|
+| 4            | Russian Caviar | Luxury           | 1563  | 946         | 249       | 697       |
+
+### 3. Which product had the highest view to purchase percentage?
+```
+SELECT
+	page_name,
+	ROUND(100*purchases / views,2) AS conversion_rate
+FROM product_summary
+ORDER BY conversion_rate DESC
+LIMIT 1;
+```
+
+| page_name | conversion_rate |
+|-----------|-----------------|
+| Lobster   | 48.74           |
+
+### 4.  What is the average conversion rate from view to cart add?
+```SQL
+SELECT 
+    ROUND(100*AVG(add_to_cart / views),2) AS conversion_rate
+FROM product_summary;
+```
+
+| conversion_rate |
+|-----------------|
+| 60.95           |
+
+### 5.What is the average conversion rate from cart add to purchase?
+```SQL
+SELECT 
+    ROUND(100*AVG(purchases / add_to_cart),2) AS conversion_rate
+FROM product_summary;
+```
+
+| conversion_rate |
+|-----------------|
+| 75.93           |
+
+
+
+## Campaign Analysis <a name="campaign-analysis"></a>
+I'll create a new output table that contains the following details:
+* user_id
+* visit_id
+* visit_start_time: the earliest event_time for each visit
+* page_views: count of page views for each visit
+* cart_adds: count of product cart add events for each visit
+* purchase: 1/0 flag if a purchase event exists for each visit
+* campaign_name: map the visit to a campaign if the visit_start_time falls between the start_date and end_date
+* impression: count of ad impressions for each visit
+* click: count of ad clicks for each visit
+* cart_products: a comma separated text value with products added to the cart sorted by the order they were added to the cart (hint: use the sequence_number)
+
+```SQL
+CREATE TABLE campaign_summary
+SELECT
+	users.user_id,
+	e.visit_id,
+    MIN(e.event_time) AS visit_start_time,
+    SUM(CASE WHEN ei.event_name = 'Page View' THEN 1 ELSE 0 END) AS page_views,
+    SUM(CASE WHEN ei.event_name = 'Add to Cart' THEN 1 ELSE 0 END) AS cart_adds,
+	SUM(CASE WHEN ei.event_name = 'Purchase' THEN 1 ELSE 0 END) AS purchase,
+    c.campaign_name,
+	SUM(CASE WHEN ei.event_name = 'Ad Impression' THEN 1 ELSE 0 END) AS impression,
+    SUM(CASE WHEN ei.event_name = 'Ad Click' THEN 1 ELSE 0 END) AS click,
+    GROUP_CONCAT(CASE WHEN ei.event_name = 'Add to Cart' THEN page_name ELSE NULL END ORDER BY e.sequence_number) AS cart_products
+FROM events AS e
+LEFT JOIN users
+	ON e.cookie_id = users.cookie_id
+LEFT JOIN event_identifier AS ei
+	ON e.event_type = ei.event_type
+LEFT JOIN page_hierarchy AS p
+	ON e.page_id = p.page_id
+LEFT JOIN campaign_identifier AS c
+	ON e.event_time BETWEEN c.start_date AND c.end_date
+GROUP BY users.user_id, e.visit_id, c.campaign_name;
+
+SELECT * FROM campaign_summary LIMIT 10;
+```
+
+| user_id | visit_id | visit_start_time    | page_views | cart_adds | purchase | campaign_name                     | impression | click | cart_products                                                        |
+|---------|----------|---------------------|------------|-----------|----------|-----------------------------------|------------|-------|----------------------------------------------------------------------|
+| 1       | 02a5d5   | 2020-02-26 16:57:26 | 4          | 0         | 0        | Half Off - Treat Your Shellf(ish) | 0          | 0     | null                                                                 |
+| 1       | 0826dc   | 2020-02-26 05:58:38 | 1          | 0         | 0        | Half Off - Treat Your Shellf(ish) | 0          | 0     | null                                                                 |
+| 1       | 0fc437   | 2020-02-04 17:49:50 | 10         | 6         | 1        | Half Off - Treat Your Shellf(ish) | 1          | 1     | Tuna,Russian Caviar,Black Truffle,Abalone,Crab,Oyster                |
+| 1       | 30b94d   | 2020-03-15 13:12:54 | 9          | 7         | 1        | Half Off - Treat Your Shellf(ish) | 1          | 1     | Salmon,Kingfish,Tuna,Russian Caviar,Abalone,Lobster,Crab             |
+| 1       | 41355d   | 2020-03-25 00:11:18 | 6          | 1         | 0        | Half Off - Treat Your Shellf(ish) | 0          | 0     | Lobster                                                              |
+| 1       | ccf365   | 2020-02-04 19:16:09 | 7          | 3         | 1        | Half Off - Treat Your Shellf(ish) | 0          | 0     | Lobster,Crab,Oyster                                                  |
+| 1       | eaffde   | 2020-03-25 20:06:32 | 10         | 8         | 1        | Half Off - Treat Your Shellf(ish) | 1          | 1     | Salmon,Tuna,Russian Caviar,Black Truffle,Abalone,Lobster,Crab,Oyster |
+| 1       | f7c798   | 2020-03-15 02:23:26 | 9          | 3         | 1        | Half Off - Treat Your Shellf(ish) | 0          | 0     | Russian Caviar,Crab,Oyster                                           |
+| 2       | 0635fb   | 2020-02-16 06:42:43 | 9          | 4         | 1        | Half Off - Treat Your Shellf(ish) | 0          | 0     | Salmon,Kingfish,Abalone,Crab                                         |
+| 2       | 1f1198   | 2020-02-01 21:51:55 | 1          | 0         | 0        | Half Off - Treat Your Shellf(ish) | 0          | 0     | null                                                                 |
+
+
+
+
 
 
 
