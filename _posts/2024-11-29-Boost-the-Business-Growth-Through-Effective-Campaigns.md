@@ -46,14 +46,14 @@ Clique Bait has acquired 500 customers over the last four to five months. On ave
 
 The most purchased product is lobster which also has the highest view-to-purchase conversion rate. The top 3 visited pages are Oyster, Crab followed by Russian Caviar. Ironically, Russian Caviar is also the most likely to be abandoned product (add to cart but not purchased) with an abandoned rate of 26%. 
 
-Campaigns had substantially boosted the page views. From January to March, Clique Bait run three campaigns, resulting in page view reaching above 800 marks. In contrast, during April and May when there aren’t any campaigns, the page visits dropped to 200. Compare the customers who receive the campaign ad impression with those who didn't receive the impression, the purchase rate was substantially higher for the former - 89% vs the latter 28%, which proved that campaigns effectively drive the sales. 
+Campaigns uplifted page views and attract more purchases from customers. From January to March, Clique Bait run three campaigns, resulting in page view reaching above 800 marks. In contrast, during April and May when there aren’t any campaigns, the page visits dropped to 200. Comparing the customers who received the campaign ad impression with those who didn't receive the impressions, we see page views per visit uplifted by 3 (8.6 vs 5.5) and purchase rate dramatically increased by 58% (89% vs 27%), which proved that campaigns did effectively drive the sales. 
 
 Of the three campaigns, "half-price" promotion achieves the highest impression-to-purchase conversion rate - 85.3% followed by "Buy-one-get-one-free" achieved 84.6%. 
 
 
 ### Insights & Recommendations <a name="overview-insights-recommendations"></a>
 
-To boost the sales growth, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally making the purchase. In this aspect, the management should keep an eye on the customers who visit the checkout page but didn't make purchases. It is recommended that we collect further information to understand what caused the customers drop the basket. 
+To boost the sales growth, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally making the purchase. In this aspect, the management should keep an eye on the customers who visit the checkout page but didn't make purchases. It is recommended that we collect further information to understand what caused the customers abandoned the checkout. 
 
 The management team could consider optimize the campigns to driver further sales uplift. Based on the sales and click-view performance of the previous three campaigns, "Half-Price" and "Buy-one-get-one-free" are the most effective. Management team could consider extend the reach of those campaigns in future if the budget permits. Suggest do further customer behaviours analysis to identify what types of customers are more likely to click the ad so we can target the customers to run the promotion to driver better outcome.
 
@@ -899,7 +899,7 @@ Now put all the four customer groups together.
 | Didn't receive impressions             | 56             | 268        | 26.4821                 | 5.5336                   | 1.1848        | 27.2                |
 
 
-Customers who received the promotions vistis more pages in each visit than customers who didn't recieve the promotion (8.6 vs 5.5 page views per visit). Customers who received the promotion also purchase more than those who didn't recieved the ad (average 5 cart-add vs 1.2). The purchase conversion rate is substantially higher (85% vs 27.2%). 
+Customers who received the promotions visited more pages in each visit than customers who didn't receive the promotion (8.6 vs 5.5 page views per visit). Customers who received the promotion also purchase more than those who didn't recieved the ad (average 5 cart-add vs 1.2). The purchase conversion rate is substantially higher (85% vs 27.2%). 
 
 Those who click the ad displayed higher page views, cart-add and purchases than those who didn't click the ad. Also note 88% of the users who received the promotion clicked the promotion ad with only 12% didn't click. This also shows that promotions did draw the attention of the customers. 
 
@@ -944,7 +944,7 @@ LEFT JOIN campaign_purchase_rate
 
 
 # Insights & Recommendations  <a name="insights-recommendations"></a>
-To boost the sales growth, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally making the purchase. In this aspect, the management should keep an eye on the customers who visit the checkout page but didn't make purchases. It is recommended that we collect further information to understand what caused the customers drop the basket. 
+To boost the sales growth, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally making the purchase. In this aspect, the management should keep an eye on the customers who visit the checkout page but didn't make purchases. It is recommended that we collect further information to understand what caused the customers abandoned the checkout. 
 
 The management team could consider optimize the campigns to driver further sales uplift. Based on the sales and click-view performance of the previous three campaigns, "Half-Price" and "Buy-one-get-one-free" are the most effective. Management team could consider extend the reach of those campaigns in future if the budget permits. Suggest do further customer behaviours analysis to identify what types of customers are more likely to click the ad so we can target the customers to run the promotion to driver better outcome.
 
