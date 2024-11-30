@@ -168,6 +168,7 @@ SELECT
 FROM event_count
 GROUP BY period;
 ```
+
 | period  | page_view | add_to_cart | purchase | impression | clicks |
 |---------|-----------|-------------|----------|------------|--------|
 | 2020-01 | 876       | 614         | 430      | 216        | 173    |
@@ -317,7 +318,28 @@ FROM visit_cte;
 |-------------------------|
 | 7.1280                  |
 
-On average, customers visit store 7.1 times.
+On average, customers visited the store 7.1 times over the five-months period.
 
+### 11. How many purchases did each customer make averagely?
+```SQL
+WITH purchase_cte AS(
+SELECT 
+	users.user_id,
+    COUNT(DISTINCT events.visit_id) AS visits
+FROM users
+LEFT JOIN events
+	ON users.cookie_id = events.cookie_id
+WHERE event_type = 3
+GROUP BY users.user_id
+)
+SELECT
+	AVG(visits) AS avg_purchases_per_customer
+FROM purchase_cte;
+```
 
+| avg_purchases_per_customer |
+|----------------------------|
+| 3.6715                     |
+
+On average, customers did 3.7 times shopping with Clique Bait over the five-months period.
 
