@@ -385,7 +385,7 @@ I'll create a new output table that contains the following details.
 * How many times was each product added to a cart but not purchased (abandoned)?
 * How many times was each product purchased?
 
-```SQL
+```
 -- Solution Structure
     -- Create a CTE prod_view: calculate the number of views and number of cart_adds for each product using CASE() and SUM()
     -- Create a CTE prod_abandon: calculate the number of abandoned products (Note: use the solution for Q9 in the Digital Analysis section. Only need to replace IN by NOT IN in the subquery).
@@ -393,7 +393,6 @@ I'll create a new output table that contains the following details.
     -- JOIN the above three CTEs using product_id, product_name and product_category of each product
     -- Store the result in a temporary table product_summary for further analysis
 
-```
 CREATE TABLE product_summary
 WITH prod_view AS (
 SELECT 
@@ -459,6 +458,7 @@ SELECT
 fROM product_summary;
 ```
 
+
 | product_id | page_name      | product_category | views | add_to_cart | abandoned | purchases |
 |------------|----------------|------------------|-------|-------------|-----------|-----------|
 | 1          | Salmon         | Fish             | 1559  | 938         | 227       | 711       |
@@ -498,7 +498,8 @@ ORDER BY fallout_rate DESC;
 | Kingfish       | Fish             | 100.0 | 59.0             | 45.3          | 13.7         |
 
 #### Further aggregate the data to create a funnel at the product category level.
-```SQL
+
+```
 CREATE TABLE category_summary
 WITH cat_view AS (
 SELECT 
