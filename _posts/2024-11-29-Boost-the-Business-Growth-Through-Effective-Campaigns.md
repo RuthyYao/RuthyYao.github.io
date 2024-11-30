@@ -298,7 +298,7 @@ LIMIT 3;
 | Crab      | Shellfish        | 719       |
 
 
-### 10. How many times did each customer visit the online store averagely?
+### 10. How many times did each customer visit the online store averagely? And what is the customer number distribution by visits?
 ```SQL
 WITH visit_cte AS(
 SELECT 
@@ -340,6 +340,34 @@ FROM purchase_cte;
 | avg_purchases_per_customer |
 |----------------------------|
 | 3.6715                     |
+
+
+```SQL
+WITH visit_cte AS(
+SELECT 
+	users.user_id,
+    COUNT(DISTINCT events.visit_id) AS visits
+FROM users
+LEFT JOIN events
+	ON users.cookie_id = events.cookie_id
+GROUP BY users.user_id
+)
+SELECT
+	visits AS visit_freqency,
+    COUNT(DISTINCT user_id) AS customer_count
+FROM visit_cte
+GROUP BY visits;
+```
+
+| visit_freqency | customer_count |
+|----------------|----------------|
+| 2              | 18             |
+| 4              | 77             |
+| 6              | 138            |
+| 8              | 166            |
+| 10             | 74             |
+| 12             | 27             |
+
 
 On average, customers did 3.7 times shopping with Clique Bait over the five-months period.
 
