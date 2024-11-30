@@ -372,13 +372,10 @@ On average, customers did 3.7 times shopping with Clique Bait over the five-mont
 ## Product Funnel <a name="product-funnel"></a>
 I'll create a new output table that contains the following details.
 
--- How many times was each product viewed?
-<br>
--- How many times was each product added to cart?
-<br>
--- How many times was each product added to a cart but not purchased (abandoned)?
-<br>
--- How many times was each product purchased?
+* How many times was each product viewed?
+* How many times was each product added to cart?
+* How many times was each product added to a cart but not purchased (abandoned)?
+* How many times was each product purchased?
 
 ```SQL
 -- Solution Structure
