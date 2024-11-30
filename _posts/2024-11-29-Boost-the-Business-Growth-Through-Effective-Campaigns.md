@@ -91,7 +91,7 @@ The "users" table stores the customers information including their user id and t
 Finally, the "campaign identifier" table provide the three campaigns's start date and end date and the products that the camppaign was on.
 
 
-# Data Analysis  <a name="data-analysis"></a>
+# Part 1 - Data Analysis  <a name="data-analysis"></a>
 
 ## Digital Analysis <a name="digital-analysis"></a>
 
@@ -197,5 +197,50 @@ WHERE event_name = 'Purchase';
 
 About half of the visits lead to a purchase. 
 
+### 6. What is the percentage of visits which view the checkout page but do not have a purchase event?
+```SQL
+WITH cte AS(
+SELECT 
+	COUNT(DISTINCT e.visit_id) AS checkout_page_visits
+FROM events AS e
+LEFT JOIN event_Identifier AS ei
+	ON e.event_type = ei.event_type
+LEFT JOIN page_hierarchy AS p
+	ON e.page_id = p.page_id
+WHERE ei.event_name = 'Page View'
+	AND p.page_name = 'Checkout'
+)
+SELECT
+	ROUND((1- COUNT(DISTINCT e.visit_id) /  (SELECT checkout_page_visits FROM cte)) * 100,2)  AS checkout_page_no_purchase 
+FROM events AS e
+LEFT JOIN event_Identifier AS ei
+	ON e.event_type = ei.event_type
+WHERE ei.event_name = 'Purchase';
+```
+| checkout_page_no_purchase |
+|---------------------------|
+| 15.50                     |
+
+15.5% of the visits abandoned the checkout.
+
+### 7. What are the top 3 product pages by number of views?
+```SQL
+SELECT
+    p.page_name,
+    COUNT(e.visit_id) AS num_views
+FROM events AS e
+LEFT JOIN page_hierarchy AS p
+	ON	e.page_id = p.page_id
+WHERE e.event_type = 1
+	AND p.product_category IS NOT NULL
+GROUP BY p.page_name
+ORDER BY num_views DESC
+LIMIT 3;
+```
+| page_name      | num_views |
+|----------------|-----------|
+| Oyster         | 1568      |
+| Crab           | 1564      |
+| Russian Caviar | 1563      |
 
 
