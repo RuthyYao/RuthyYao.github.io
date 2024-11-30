@@ -690,8 +690,7 @@ SELECT * FROM campaign_summary LIMIT 10;
 | 2       | 0635fb   | 2020-02-16 06:42:43 | 9          | 4         | 1        | Half Off - Treat Your Shellf(ish) | 0          | 0     | Salmon,Kingfish,Abalone,Crab                                         |
 | 2       | 1f1198   | 2020-02-01 21:51:55 | 1          | 0         | 0        | Half Off - Treat Your Shellf(ish) | 0          | 0     | null                                                                 |
 
-Further investigation to generate additional insights about the campaign effectiveness.
-Some thoughts around comparing the key metrics between customers who received the ad impression vs customers who didn't receive the ad impression. 
+To evaluate the effectiveness of the campaigns, let's comparing the key metrics between customers who received the ad impression vs customers who didn't receive the ad impression. 
 
 * I'll create two customer groups:
 	* Group 1: Received impression.
@@ -699,7 +698,7 @@ Some thoughts around comparing the key metrics between customers who received th
 * Under Group 1, create two sub-groups:
   	* Sub-group 1: received impressions and also click the impressions.
   	* Sub-group 2: received impressions but didn't click the impressions.
-* Create a performance metrics for each group and compare metrics between the customer groups.
+* Create a performance metrics for each group and compare the metrics between the customer groups.
 
  	-> Performance metrics includes the page_views per user, page_views per visit, average number of products add to cart, purchase rate. 
 
@@ -898,5 +897,12 @@ Now put all the four customer groups together.
 | Received impressions and clicked       | 367            | 599        | 14.8038                  | 9.0701                   | 5.7162         | 89.6               |
 | Received impressions but didn't  click | 50             | 61         | 7.62                     | 6.2459                   | 2.2295         | 65.6               |
 | Didn't receive impressions             | 56             | 268        | 26.4821                  | 5.5336                   | 1.1848         | 27.2               |
+
+
+Customers who received the promotions vistis more pages in each visit than customers who didn't recieve the promotion (8.6 vs 5.5 page views per visit). Customers who received the promotion also purchase more than those who didn't recieved the ad (average 5 cart-add vs 1.2). The purchase conversion rate is substantially higher (85% vs 27.2%). 
+
+Those who click the ad displayed higher page views, cart-add and purchases than those who didn't click the ad. Also note 88% of the users who received the promotion clicked the promotion ad with only 12% didn't click. This also shows that promotions did draw the attention of the customers. 
+
+Finally, Let's compare the performance between the three campaigns.
 
 
