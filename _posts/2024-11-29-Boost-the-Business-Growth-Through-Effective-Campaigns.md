@@ -20,7 +20,7 @@ Clique Bait, an online seafood shop wants to gain detailed insights into their s
     - [Digital Analysis](#digital-analysis)
     - [Product Funnel](#product-funnel)
     - [Campaign Analysis](#campaign-analysis)
-- [03. Results & Application](#results-application)
+- [03. Insights & Recommendations](#insights-recommendations)
 - [04. Growth & Next Steps](#growth-next-steps)
 
 ___
@@ -68,7 +68,7 @@ The analysis shows that Oyster and Crab are the most purchased products. The man
 * Further analysis on customers visits and shopping basket to segment the customers and develop more customerized campaigns and promotions.
 
 
-# Data Overview  <a name="data-overview"></a>
+# Data Understanding  <a name="data-understanding"></a>
 
 Entity Relationship Diagram:
 
@@ -91,9 +91,9 @@ The "users" table stores the customers information including their user id and t
 Finally, the "campaign identifier" table provide the three campaigns's start date and end date and the products that the camppaign was on.
 
 
-# Part 1 - Data Analysis  <a name="data-analysis"></a>
+# Data Analysis  <a name="data-analysis"></a>
 
-## Digital Analysis <a name="digital-analysis"></a>
+## Part 1 - Digital Analysis <a name="digital-analysis"></a>
 
 ### 1. Calculate total number of customers.
 ```SQL
@@ -369,7 +369,7 @@ FROM purchase_cte;
 
 On average, customers did 3.7 times shopping with Clique Bait over the five-months period.
 
-## Product Funnel <a name="product-funnel"></a>
+## Part 2 - Product Funnel <a name="product-funnel"></a>
 I'll create a new output table that contains the following details.
 
 * How many times was each product viewed?
@@ -637,7 +637,7 @@ FROM product_summary;
 
 
 
-## Campaign Analysis <a name="campaign-analysis"></a>
+## Part 3 - Campaign Analysis <a name="campaign-analysis"></a>
 I'll create a new output table that contains the following details:
 * user_id
 * visit_id
@@ -891,12 +891,12 @@ WHERE campaign_name IS NOT NULL
 Now put all the four customer groups together.
 
 
-| **Customer Group**                     | **user_count** | **visits** | **page_views_per_user ** | **page_views_per_visit** | ** cart_adds** | ** purchase_rate** |
-|----------------------------------------|----------------|------------|--------------------------|--------------------------|----------------|--------------------|
-| Received impressions                   | 417            | 747        | 15.3213                  | 8.5529                   | 5.0482         | 85                 |
-| Received impressions and clicked       | 367            | 599        | 14.8038                  | 9.0701                   | 5.7162         | 89.6               |
-| Received impressions but didn't  click | 50             | 61         | 7.62                     | 6.2459                   | 2.2295         | 65.6               |
-| Didn't receive impressions             | 56             | 268        | 26.4821                  | 5.5336                   | 1.1848         | 27.2               |
+| **Customer Group**                     | **user_count** | **visits** | **page_views_per_user** | **page_views_per_visit** | **cart_adds** | **purchase_rate %** |
+|----------------------------------------|----------------|------------|-------------------------|--------------------------|---------------|---------------------|
+| Received impressions                   | 417            | 747        | 15.3213                 | 8.5529                   | 5.0482        | 85                  |
+| Received impressions and clicked       | 367            | 599        | 14.8038                 | 9.0701                   | 5.7162        | 89.6                |
+| Received impressions but didn't  click | 50             | 61         | 7.62                    | 6.2459                   | 2.2295        | 65.6                |
+| Didn't receive impressions             | 56             | 268        | 26.4821                 | 5.5336                   | 1.1848        | 27.2                |
 
 
 Customers who received the promotions vistis more pages in each visit than customers who didn't recieve the promotion (8.6 vs 5.5 page views per visit). Customers who received the promotion also purchase more than those who didn't recieved the ad (average 5 cart-add vs 1.2). The purchase conversion rate is substantially higher (85% vs 27.2%). 
@@ -904,5 +904,43 @@ Customers who received the promotions vistis more pages in each visit than custo
 Those who click the ad displayed higher page views, cart-add and purchases than those who didn't click the ad. Also note 88% of the users who received the promotion clicked the promotion ad with only 12% didn't click. This also shows that promotions did draw the attention of the customers. 
 
 Finally, Let's compare the performance between the three campaigns.
+```SQL
+WITH campaign_performance AS(
+SELECT
+    campaign_name,
+    SUM(impression) AS no_of_impressions,
+    SUM(click) AS no_of_clicks,
+    SUM(click) / SUM(impression) AS click_rate
+FROM campaign_summary
+WHERE campaign_name IS NOT NULL
+GROUP BY campaign_name
+),
+campaign_purchase_rate AS(
+SELECT 
+    campaign_name,
+    AVG(purchase) AS purchase_rate
+FROM campaign_summary
+WHERE impression > 0
+    AND campaign_name IS NOT NULL
+GROUP BY campaign_name
+)
+SELECT
+    campaign_performance.*,
+    campaign_purchase_rate.purchase_rate
+FROM campaign_performance
+LEFT JOIN campaign_purchase_rate
+    ON campaign_performance.campaign_name = campaign_purchase_rate.campaign_name;
+```
+
+| campaign_name                     | no_of_impressions | no_of_clicks | click_rate | purchase_rate |
+|-----------------------------------|-------------------|--------------|------------|---------------|
+| Half Off - Treat Your Shellf(ish) | 578               | 463          | 0.8010     | 0.8529        |
+| 25% Off - Living The Lux Life     | 104               | 81           | 0.7788     | 0.8365        |
+| BOGOF - Fishing For Compliments   | 65                | 55           | 0.8462     | 0.8462        |
+
+* Half Off campaign has the broadest reach of users and achieved the highest purchase rate. 
+* BOGOF had the highest click rate. The purchase rate is also very impressive. Clique Bait could consider run this campaign in a larger scale in future.
+* 25% Off campaign has the lowest click rate among the three campaigns. However the purchase rate is not too far off compared with the other two campaigns. 
 
 
+# Insights & Recommendations  <a name="insights-recommendations"></a>
