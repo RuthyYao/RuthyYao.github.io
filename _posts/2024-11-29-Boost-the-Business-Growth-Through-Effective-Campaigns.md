@@ -944,3 +944,21 @@ LEFT JOIN campaign_purchase_rate
 
 
 # Insights & Recommendations  <a name="insights-recommendations"></a>
+To boost the sales growth, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally making the purchase. In this aspect, the management should keep an eye on the customers who visit the checkout page but didn't make purchases. It is recommended that we collect further information to understand what caused the customers drop the basket. 
+
+The management team could consider optimize the campigns to driver further sales uplift. Based on the sales and click-view performance of the previous three campaigns, "Half-Price" and "Buy-one-get-one-free" are the most effective. Management team could consider extend the reach of those campaigns in future if the budget permits. Suggest do further customer behaviours analysis to identify what types of customers are more likely to click the ad so we can target the customers to run the promotion to driver better outcome.
+
+The analysis shows that Oyster and Crab are the most purchased products. The management team could leverage the data insights to plan the purchase and stocking. Luxury category reveals very distinctive shopping behaviours - high views but low conversion. The management team could consider implement some limited-time promotions such as flash sales to generate excitement, drive sales and this could also help clear out excessive stocks.
+
+
+# Growth/Next Steps <a name="growth-next-steps"></a>
+
+* To drive the conversion rate up, we could test different promotional strategies and track the change of the product funnel conversion and fallout rate. 
+
+* We could also collect external data to establish a benchmark for the key metrics to help us better gauge our performance. 
+
+* Further analysis on customers visits and shopping basket to segment the customers and develop more customerized campaigns and promotions.
+
+<br>
+
+Note: This project comes from [#8WeekSQLChallenge-CaseStudy#6](https://8weeksqlchallenge.com/case-study-6/)
