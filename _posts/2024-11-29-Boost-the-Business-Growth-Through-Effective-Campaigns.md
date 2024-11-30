@@ -101,9 +101,6 @@ SELECT
 	COUNT(DISTINCT user_id) AS customer_count
 FROM users;
 ```
-| customer_count |
-| -------------- |
-| 500            |
 
 | customer_count |
 |----------------|
@@ -191,6 +188,7 @@ LEFT JOIN event_Identifier AS ei
 	ON e.event_type = ei.event_type
 WHERE event_name = 'Purchase';
 ```
+
 | purchase_percentage |
 |---------------------|
 | 49.9                |
@@ -217,6 +215,7 @@ LEFT JOIN event_Identifier AS ei
 	ON e.event_type = ei.event_type
 WHERE ei.event_name = 'Purchase';
 ```
+
 | checkout_page_no_purchase |
 |---------------------------|
 | 15.50                     |
@@ -237,10 +236,33 @@ GROUP BY p.page_name
 ORDER BY num_views DESC
 LIMIT 3;
 ```
+
 | page_name      | num_views |
 |----------------|-----------|
 | Oyster         | 1568      |
 | Crab           | 1564      |
 | Russian Caviar | 1563      |
+
+
+### 8. What is the number of views and cart adds for each product category?
+```SQL
+SELECT
+	p.product_category,
+    SUM(CASE WHEN event_type = 1 THEN 1 ELSE 0 END) AS num_views,
+    SUM(CASE WHEN event_type = 2 THEN 1 ELSE 0 END) AS num_add_cart
+FROM events AS e
+LEFT JOIN page_hierarchy AS p
+	ON	e.page_id = p.page_id
+WHERE product_category IS NOT NULL
+GROUP BY p.product_category;
+```
+
+| product_category | num_views | num_add_cart |
+|------------------|-----------|--------------|
+| Luxury           | 3032      | 1870         |
+| Shellfish        | 6204      | 3792         |
+| Fish             | 4633      | 2789         |
+
+
 
 
