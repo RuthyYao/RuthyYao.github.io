@@ -369,3 +369,100 @@ FROM purchase_cte;
 
 On average, customers did 3.7 times shopping with Clique Bait over the five-months period.
 
+## Product Funnel <a name="product-funnel"></a>
+I'll create a new output table that contains the following details.
+
+-- How many times was each product viewed?
+<br>
+-- How many times was each product added to cart?
+<br>
+-- How many times was each product added to a cart but not purchased (abandoned)?
+<br>
+-- How many times was each product purchased?
+
+```SQL
+-- Solution Structure
+    -- Create a CTE prod_view: calculate the number of views and number of cart_adds for each product using CASE() and SUM()
+    -- Create a CTE prod_abandon: calculate the number of abandoned products (Note: use the solution for Q9 in the Digital Analysis section. Only need to replace IN by NOT IN in the subquery).
+    -- Create a CTE prod_purchased: calculate the number of purchased products (solution for Q9 in the Digital Analysis section)
+    -- JOIN the above three CTEs using product_id, product_name and product_category of each product
+    -- Store the result in a temporary table product_summary for further analysis
+
+CREATE TABLE product_summary
+WITH prod_view AS (
+SELECT 
+    p.product_id,
+    p.page_name,
+    p.product_category,
+    SUM(CASE WHEN e.page_id NOT IN (1,2,12,13) AND e.event_type = 1 THEN 1 ELSE 0 END) AS views,
+    SUM(CASE WHEN e.event_type = 2 THEN 1 ELSE 0 END) AS add_to_cart
+FROM events AS e
+LEFT JOIN page_hierarchy as p
+	ON e.page_id = p.page_id
+WHERE product_id IS NOT NULL
+GROUP BY  p.product_id, p.page_name, p.product_category
+),
+prod_abandon AS(
+SELECT
+    p.product_id,
+    p.page_name,
+    p.product_category,
+    COUNT(e.visit_id) AS abandoned
+FROM events AS e 
+LEFT JOIN page_hierarchy AS p
+	ON p.page_id = e.page_id
+WHERE e.event_type = 2  -- 1st layer - products are add to cart.
+AND e.visit_id NOT IN 
+	(SELECT
+		visit_id
+	FROM events
+    WHERE event_type = 3) -- 2nd layer - products NOT purchased.
+GROUP BY p.product_id, p.page_name, p.product_category
+),
+prod_purchased AS(
+SELECT
+    p.product_id,
+    p.page_name,
+    p.product_category,
+    COUNT(e.visit_id) AS purchases
+FROM events AS e 
+LEFT JOIN page_hierarchy AS p
+	ON p.page_id = e.page_id
+WHERE e.event_type = 2  -- 1st layer - products are add to cart.
+AND e.visit_id IN 
+	(SELECT
+		visit_id
+	FROM events
+    WHERE event_type = 3) -- 2nd layer - products are purchased.
+GROUP BY p.product_id, p.page_name, p.product_category
+)
+SELECT
+	pv.*,
+    pa.abandoned,
+    pp.purchases
+FROM prod_view AS pv
+LEFT JOIN prod_abandon AS pa
+	ON pv.product_id = pa.product_id
+LEFT JOIN prod_purchased AS pp
+	ON pv.product_id = pp.product_id
+ORDER BY pv.product_id;
+;
+
+SELECT
+	*
+fROM product_summary;
+```
+
+| product_id | page_name      | product_category | views | add_to_cart | abandoned | purchases |
+|------------|----------------|------------------|-------|-------------|-----------|-----------|
+| 1          | Salmon         | Fish             | 1559  | 938         | 227       | 711       |
+| 2          | Kingfish       | Fish             | 1559  | 920         | 213       | 707       |
+| 3          | Tuna           | Fish             | 1515  | 931         | 234       | 697       |
+| 4          | Russian Caviar | Luxury           | 1563  | 946         | 249       | 697       |
+| 5          | Black Truffle  | Luxury           | 1469  | 924         | 217       | 707       |
+| 6          | Abalone        | Shellfish        | 1525  | 932         | 233       | 699       |
+| 7          | Lobster        | Shellfish        | 1547  | 968         | 214       | 754       |
+| 8          | Crab           | Shellfish        | 1564  | 949         | 230       | 719       |
+| 9          | Oyster         | Shellfish        | 1568  | 943         | 217       | 726       |
+
+
