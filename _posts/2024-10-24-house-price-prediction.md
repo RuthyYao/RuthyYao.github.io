@@ -38,7 +38,7 @@ The model also identified the the most correlated factors with the house price.
 
 ![alt text](/img/house-price-predict/Feature_selected.png)
 
-Some key inisghts are:
+Some key insights are:
 
 * Being waterfront can substaintially drive the house price up.
 * Renovation can increase the house value.
