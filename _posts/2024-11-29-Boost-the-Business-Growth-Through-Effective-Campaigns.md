@@ -55,7 +55,7 @@ Of the three campaigns, "half-price" promotion achieves the highest impression-t
 
 To boost the sales growth, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally making the purchase. In this aspect, the management should keep an eye on the customers who visit the checkout page but didn't make purchases. It is recommended that we collect further information to understand what caused the customers abandoned the checkout. 
 
-The management team could consider optimize the campigns to driver further sales uplift. Based on the sales and click-view performance of the previous three campaigns, "Half-Price" and "Buy-one-get-one-free" are the most effective. Management team could consider extend the reach of those campaigns in future if the budget permits. Suggest do further customer behaviours analysis to identify what types of customers are more likely to click the ad so we can target the customers to run the promotion to driver better outcome.
+The management team could consider optimize the campaigns to driver further sales uplift. Based on the sales and click-view performance of the previous three campaigns, "Half-Price" and "Buy-one-get-one-free" are the most effective. Management team could consider extend the reach of those campaigns in future if the budget permits. Suggest do further customer behaviours analysis to identify what types of customers are more likely to click the ad so we can target the customers to run the promotion to driver better outcome.
 
 The analysis shows that Oyster and Crab are the most purchased products. The management team could leverage the data insights to plan the purchase and stocking. Luxury category reveals very distinctive shopping behaviours - high views but low conversion. The management team could consider implement some limited-time promotions such as flash sales to generate excitement, drive sales and this could also help clear out excessive stocks.
 
@@ -65,7 +65,7 @@ The analysis shows that Oyster and Crab are the most purchased products. The man
 
 * We could also collect external data to establish a benchmark for the key metrics to help us better gauge our performance. 
 
-* Further analysis on customers visits and shopping basket to segment the customers and develop more customerized campaigns and promotions.
+* Further analysis on customers visits and shopping basket to segment the customers and develop more customized campaigns and promotions.
 
 
 # Data Understanding  <a name="data-understanding"></a>
@@ -78,17 +78,17 @@ Entity Relationship Diagram:
 ![alt text](/img/clique-bait/case-study-6-erd.PNG "Entity Relationship Diagram")
 <br>
 
-The original dataset have five data tables. The primary data table is "events" which is the raw data of the customer visits. It stores the visits id, the visti time, the page visited and the activities on the page. 
+The original dataset has five data tables. The primary data table is "events" which is the raw data of the customer visits. It stores the visits id, the visit time, the page visited and the activities on the page. 
 
 <br>
 
 The "users" table stores the customers information including their user id and the cookies they have and the time each cookie generated. 
 <br>
 
-"Event_identifier"  and "Page Hierarchy" are mapping tables. The former provides the activities names for each event_id and the page name and the latter maps out the page_name and product hierarchy for each page id. Note that each product has a page Hence it has a unique page id and product id. 
+"Event_identifier" and "Page Hierarchy" are mapping tables. The former provides the activities names for each event_id and the page name and the latter maps out the page_name and product hierarchy for each page id. Note that each product has a page Hence it has a unique page id and product id. 
 <br>
 
-Finally, the "campaign identifier" table provide the three campaigns's start date and end date and the products that the camppaign was on.
+Finally, the "campaign identifier" table provide the three campaigns’ start date and end date and the products that the campaign was on.
 
 
 # Data Analysis  <a name="data-analysis"></a>
@@ -582,7 +582,7 @@ FROM category_summary;
 | Shellfish        | 100.0 | 61.1             | 46.7          | 14.4         |
 | Fish             | 100.0 | 60.2             | 45.7          | 14.5         |
 
-Luxury products has higher fallout rate than the other two categories.
+Luxury products have higher fallout rate than the other two categories.
 
 ### 1. Which product had the most views, cart adds and purchases?
 ```
@@ -635,7 +635,7 @@ FROM product_summary;
 |-----------------|
 | 60.95           |
 
-### 5.What is the average conversion rate from cart add to purchase?
+### 5. What is the average conversion rate from cart add to purchase?
 ```
 SELECT 
     ROUND(100*AVG(purchases / add_to_cart),2) AS conversion_rate
@@ -913,7 +913,7 @@ Now put all the four customer groups together.
 | Didn't receive impressions             | 56             | 268        | 26.4821                 | 5.5336                   | 1.1848        | 27.2                |
 
 
-Customers who received the promotions visited more pages in each visit than customers who didn't receive the promotion (8.6 vs 5.5 page views per visit). Customers who received the promotion also purchase more than those who didn't recieved the ad (average 5 cart-add vs 1.2). The purchase conversion rate is substantially higher (85% vs 27.2%). 
+Customers who received the promotions visited more pages in each visit than customers who didn't receive the promotion (8.6 vs 5.5 page views per visit). Customers who received the promotion also purchase more than those who didn't receive the ad (average 5 cart-add vs 1.2). The purchase conversion rate is substantially higher (85% vs 27.2%). 
 
 Those who click the ad displayed higher page views, cart-add and purchases than those who didn't click the ad. Also note 88% of the users who received the promotion clicked the promotion ad with only 12% didn't click. This also shows that promotions did draw the attention of the customers. 
 
@@ -955,13 +955,13 @@ LEFT JOIN campaign_purchase_rate
 
 * Half Off campaign has the broadest reach of users and achieved the highest purchase rate. 
 * BOGOF had the highest click rate. The purchase rate is also very impressive. Clique Bait could consider run this campaign in a larger scale in future.
-* 25% Off campaign has the lowest click rate among the three campaigns. However the purchase rate is not too far off compared with the other two campaigns. 
+* 25% Off campaign has the lowest click rate among the three campaigns. However, the purchase rate is not too far off compared with the other two campaigns. 
 
 
 # Insights & Recommendations  <a name="insights-recommendations"></a>
 To boost the sales growth, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally making the purchase. In this aspect, the management should keep an eye on the customers who visit the checkout page but didn't make purchases. It is recommended that we collect further information to understand what caused the customers abandoned the checkout. 
 
-The management team could consider optimize the campigns to driver further sales uplift. Based on the sales and click-view performance of the previous three campaigns, "Half-Price" and "Buy-one-get-one-free" are the most effective. Management team could consider extend the reach of those campaigns in future if the budget permits. Suggest do further customer behaviours analysis to identify what types of customers are more likely to click the ad so we can target the customers to run the promotion to driver better outcome.
+The management team could consider optimize the campaigns to driver further sales uplift. Based on the sales and click-view performance of the previous three campaigns, "Half-Price" and "Buy-one-get-one-free" are the most effective. Management team could consider extend the reach of those campaigns in future if the budget permits. Suggest do further customer behaviours analysis to identify what types of customers are more likely to click the ad so we can target the customers to run the promotion to driver better outcome.
 
 The analysis shows that Oyster and Crab are the most purchased products. The management team could leverage the data insights to plan the purchase and stocking. Luxury category reveals very distinctive shopping behaviours - high views but low conversion. The management team could consider implement some limited-time promotions such as flash sales to generate excitement, drive sales and this could also help clear out excessive stocks.
 
@@ -972,7 +972,7 @@ The analysis shows that Oyster and Crab are the most purchased products. The man
 
 * We could also collect external data to establish a benchmark for the key metrics to help us better gauge our performance. 
 
-* Further analysis on customers visits and shopping basket to segment the customers and develop more customerized campaigns and promotions.
+* Further analysis on customers visits and shopping basket to segment the customers and develop more customized campaigns and promotions.
 
 <br>
 
