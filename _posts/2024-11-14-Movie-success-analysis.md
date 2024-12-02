@@ -10,11 +10,11 @@ Our client is preparing to enter the movie production market. To increase their 
 
 ## Overview
 
-This project analyses the key successful factors of a movie studio to prepare Microsoft to enter the movie production market. Description analysis of the popularity score, gross revenue, production budget and profit shows that the top performing genres are Animations, Sci-fi and Adventures and the best months to release movies in a year are May, July and Novemeber. It is advisable to allocate at least $500m of budget to movie production each year.
+This project analyses the key successful factors of a movie studio to prepare Microsoft to enter the movie production market. Description analysis of the popularity score, gross revenue, production budget and profit shows that the top performing genres are Animations, Sci-fi and Adventures and the best months to release movies in a year are May, July and November. It is advisable to allocate at least $500m of budget to movie production each year.
 
 ## Business Problem
 
-As a new entrant to the movie production market, Microsoft has limited industry knowledge. To complete with globally well-established production companies which have generally over seven to eight decades of history, it is crucial to dive into the vast movie database to distill insights on where to start, when to start and how much funding is required. This will help Microsoft to bridge the knowledge gap, allocate the resources more efficeintly and increase its chances of success for the new studio. 
+As a new entrant to the movie production market, Microsoft has limited industry knowledge. To complete with globally well-established production companies which have generally over seven to eight decades of history, it is crucial to dive into the vast movie database to gain insights on where to start, when to start and how much funding is required. This will help Microsoft to bridge the knowledge gap, allocate the resources more efficiently and increase its chances of success for the new studio. 
 
 ## Data and Methods
 
@@ -24,7 +24,7 @@ The project uses descriptive analysis, including description of the average popu
 
 ## Results
 
-Based on the average popularity socre of each genre and the aerage worldwide gross revenue of each genre, the most popular and the best performing genres are Animation, Sci-fi and Adventure.
+Based on the average popularity score of each genre and the average worldwide gross revenue of each genre, the most popular and the best performing genres are Animation, Sci-fi and Adventure.
 
 <br>
 ![alt text](/img/movie-success-analysis/popularity_score_per_genre.png)
@@ -48,18 +48,18 @@ Studios commit a production budget of averagely $550-$700 per annum.
 
 This analysis leads to three recommendations for Microsoft to start the movie production business successfully.
 
-- **Focus on genres with a mix of Animation, Sci-fi and Adventure.** This type of movies have potentially the broadest span of audience demographics. Hence from popularity and box office performance persepctives, those types of movie deliver the most success. 
+- **Focus on genres with a mix of Animation, Sci-fi and Adventure.** This type of movies have potentially the broadest span of audience demographics. Hence from popularity and box office performance perspectives, those types of movie deliver the most success. 
 
-- **Allocate at least $500m budget to movie production each year.** Given that a movie costs averagely $40m to $50m to produce with the Animation/Sci-fi/Adventure requiring even higher budget(at least $80m), Microsoft need to be prepared to invest at least $500m per year to to the new studio in order to make an impactful debut to the movie market and sustain the ongoing success of the studio. 
+- **Allocate at least $500m budget to movie production each year.** Given that a movie costs averagely $40m to $50m to produce with the Animation/Sci-fi/Adventure requiring even higher budget(at least $80m), Microsoft need to be prepared to invest at least $500m per year to the new studio in order to make an impactful debut to the movie market and sustain the ongoing success of the studio. 
 
-- **Release movies in May/July or November to maximize the box office revenue and achieve the best theatrical view.** School holiday season is the best time to relase movie, especially for the Animation/Sci-fi/Adventure movies that target kids and families. Novermber is also a good time to release movie if Microsoft wants to compete in the upcoming Academy Awards as releasing a movie two or three months before the nomination of the awards will make it fresh in the voters' mind, increasing the chances of win.   
+- **Release movies in May/July or November to maximize the box office revenue and achieve the best theatrical view.** School holiday season is the best time to release movie, especially for the Animation/Sci-fi/Adventure movies that target kids and families. November is also a good time to release movie if Microsoft wants to compete in the upcoming Academy Awards as releasing a movie two or three months before the nomination of the awards will make it fresh in the voters' mind, increasing the chances of win.   
 
 ### Nest Steps
 Further analyses could yield additional insights to further increase the chances of success of the new studio:
 
 - **Modelling to extract the insights from movie reviews and critiques** - Extracting and analysing data from reviews and critiques can unveil further insights on what kinds of movies are liked or disliked by the public.  
 
-- **Customer segmentation analysis** - Segmenting the customers based on demographics to analyze the genre prefernece and viewing behaviours of different customer groups. This will allow Miscrosoft to target certain customer groups for the movie production.
+- **Customer segmentation analysis** - Segmenting the customers based on demographics to analyse the genre preference and viewing behaviours of different customer groups. This will allow Microsoft to target certain customer groups for the movie production.
 
 - **Awards analysis** - Dive into the Oscar-awarded movies to identify the key attributes of successful movies. 
 
