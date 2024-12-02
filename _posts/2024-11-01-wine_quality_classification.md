@@ -16,16 +16,16 @@ To solve the business problems, predicative analysis tested on three classificat
 
 ## Business Problem
 
-Riverwood Wine is a renowed winemaker in the industry. Every year, they participate in the industry competition for quality award. Wining the award will greatly enhance their brand value and boost their sales. 
+Riverwood Wine is a renowned winemaker in the industry. Every year, they participate in the industry competition for quality award. Winning the award will greatly enhance their brand value and boost their sales. 
 
-Historically, Riverwood Wine enlisted all their products to the industry competition. To increase their chances of win, they would invest significantly on all products, which is not only costly but also less efficient in using the capital. Moving foreward, Riverwood Wine plans to adopt a more "focused" approach in their sales and marketing spend - they will allocate the capital to only the "high-quality" wines that are most likely to win the industry award. The management team also want to find out the drivers of high-quality wines, so they can target the prarmeters to be measured and managed during the fermentation process. This will ultimately enhance the quality of their wine products. 
+Historically, Riverwood Wine enlisted all their products to the industry competition. To increase their chances of win, they would invest significantly on all products, which is not only costly but also less efficient in using the capital. Moving forward, Riverwood Wine plans to adopt a more "focused" approach in their sales and marketing spend - they will allocate the capital to only the "high-quality" wines that are most likely to win the industry award. The management team also want to find out the drivers of high-quality wines, so they can target the parameters to be measured and managed during the fermentation process. This will ultimately enhance the quality of their wine products. 
 
 We will look to understand the probability of wines that would be rated as "high-quality" by the industry body and what the drivers are for this, so Riverwood Wine can target the physio-chemical properties that need to measured and managed to secure a "high-quality" rating.
 
 
 ## Data and Methods
 
-The dataset comes from the red variants of the Portuguese "Vinho Verde" wine (see [Cortez et al., 2009], http://www3.dsi.uminho.pt/pcortez/wine/), which contains 1599 entries of red wine products. Te data features 11 physiochemical properties and the wine quality in ordinal numbers from 1 to 8. 
+The dataset comes from the red variants of the Portuguese "Vinho Verde" wine (see [Cortez et al., 2009], http://www3.dsi.uminho.pt/pcortez/wine/), which contains 1599 entries of red wine products. The data features 11 physiochemical properties and the wine quality in ordinal numbers from 1 to 8. 
 
 This project employs the descriptive and predictive analysis to identify the most contributing factors for a high-quality wine. Based on the 11 physiochemical parameters, it can predict whether a wine will achieve the "high-quality" status. This provides great insights on what makes a "high-quality" wine, the most determining physiochemical properties and the desirable range for each.  
 
@@ -47,17 +47,17 @@ For the top five parameters, the desirable value range based on where the most d
 * Sulphates - to control between 0.65 and 0.86;
 * Volatile acidity - to control between 0.3 and 0.49;
 * Density - to control between 0.9947 and 0.9974;
-* Total sulfur dioxide - to control between 17 and 43.
+* Total sulphur dioxide - to control between 17 and 43.
 
 ### Nest Steps
 
 Further analyses could yield additional insights to further improve the prediction at Riverwood Wine.
     
-- **Enlarge the sample size** - This dataset has only 1599 entires of the wine product with only ~230 classified as "high-quality". Enlarge the sample size will improve the predicative accuracy.
+- **Enlarge the sample size** - This dataset has only 1599 entries of the wine product with only ~230 classified as "high-quality". Enlarge the sample size will improve the predicative accuracy.
 
 - **Analyse the interacted features** - Some physicochemical properties are interdependent. Build interaction features will improve the predicative power. 
 
-- **Prepare for the model deployment** - - Further analysis on what fermentation techniques and how to implement the techniques to control the physio-chemical properties in the desirable range will prepare us for the implementation of those analytical insights in the real world practice.  
+- **Prepare for the model deployment** - - Further analysis on what fermentation techniques and how to implement the techniques to control the physio-chemical properties in the desirable range will prepare us for the implementation of those analytical insights in the real-world practice.  
 
 ## For More Information
 
