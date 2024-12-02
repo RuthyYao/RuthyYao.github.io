@@ -25,14 +25,14 @@ ___
 # Project Overview  <a name="overview-main"></a>
 
 ### Business Problem <a name="overview-business-problem"></a>
-Foodie Fi started the video streaming service that only had food related content a year ago. They sell monthly and annual sbuscription plans, giving their customer unlimited on-demand access to exclusively food related vedios from around the world. The management team wants to review the product performance and would like to make data-based decisions on products, customers and other business growth strategies in the future.
+Foodie Fi started the video streaming service that only had food related content a year ago. They sell monthly and annual subscription plans, giving their customer unlimited on-demand access to exclusively food related videos from around the world. The management team wants to review the product performance and would like to make data-based decisions on products, customers and other business growth strategies in the future.
 <br>
 
 ### Actions <a name="overview-actions"></a>
 I first compiled the necessary data from the data tables that contains the plans and customer subscriptions data.
-Then I consolidated the data tables and from there, I learned about the diffenet customer onboarding journeys. 
+Then I consolidated the data tables and from there, I learned about the different customer onboarding journeys. 
 Next, I applied SQL syntax to perform the data analysis and exploration where I gained the insights on some key business performance metrics such as 
-* The number of newly acquried customers
+* The number of newly acquired customers
 * The customers distribution by products
 * The percentage of customers who upgrade their plans
 * The average days for customers to upgrade from trial to a paid premium plan. etc.
@@ -44,16 +44,17 @@ On top of that, I also created a payment table that allows the business to work 
 Foodie Fi have acquired 1000 customers since the business started with c.80 new customers each month. Of the total 1000 customers, 307 customers has churned - churn rate 30.7%.  Data shows that after the trial, 55% of the customers upgrade to the basic monthly plan, 32.5% of the customers subscribed the pro monthly plan, 3.7% of the customers upgraded to the pro annual plan straightaway and 9.2% of the customers churned. It took averagely 105 days from trial to upgrade to a pro plan (paid premium plans). In 2021, there were 123 customers upgraded to a pro plan.  
 
 ### Applications <a name="overview-applications"></a>
-To support the management team to monitor the business performance ongoingly, I would leverage the data insights to build a dahsboard that allows us to track the key metrics over time. Specifically, I would call out the following KPIs:
+To support the management team to monitor the business performance ongoingly, I would leverage the data insights to build a dashboard that allows us to track the key metrics over time. Specifically, I would call out the following KPIs:
 * **Monthly Revenue Growth** - how does the business grow their revenue monty-over-month.
 * **Total subscribers** - how many customers the business has in total at a point. This reflects the reach and popularity of Foodie Fi.
-* **The customer growth** - how customers increase month-over-month. THis reveals the momentum of the expansion of their customer base.
+* **The customer growth** - how customers increase month-over-month. This reveals the momentum of the expansion of their customer base.
 * **Conversion rate** - how many customers stay in Foodie Fi after the trial. Howe does the rate look like.
-* **Churn rate** - how many customers cancel their plan each month?  This signals customer dissatisfaction and can help pinpoint areas for improvements in suer expereince, pricing or content library etc.
+* **Churn rate** - how many customers cancel their plan each month?  This signals customer dissatisfaction and can help pinpoint areas for improvements in suer experience, pricing or content library etc.
 
 ### Growth/Next Steps <a name="overview-growth"></a>
-* **Improve the customer retention** - Further analysis on customers engagement for the customer cohort who upgrade their plan, those who downgrade from pro to basic plans, and those who cancel their subscriptions to yield additional insights on on how to improve customer retentions.
-* **Reduce the customer churn rate** - Leverage the data insights to design an exit survey to customers who wish to cancel thier subscriptions. This could help Foodie Fi to identify the common reasons for their cancellation and take measures to reduce the customer churn. We could monitor the churn rate and convertion rate to validate the effectiveness of those measures.
+* **Improve the customer retention** - Further analysis on customers engagement for the customer cohort who upgrade their plan, those who downgrade from pro to basic plans, and those who cancel their subscriptions to yield additional insights on how to improve customer retentions.
+  
+* **Reduce the customer churn rate** - Leverage the data insights to design an exit survey to customers who wish to cancel their subscriptions. This could help Foodie Fi to identify the common reasons for their cancellation and take measures to reduce the customer churn. We could monitor the churn rate and conversion rate to validate the effectiveness of those measures.
 
 # Data Overview  <a name="data-overview"></a>
 The original dataset has two data tables. 
@@ -127,17 +128,17 @@ WHERE customer_id IN (1, 2, 11, 13, 15, 16, 18, 19);
 | 19          | 0       | 2020-06-22 | trial         | 0.00   |
 | 19          | 2       | 2020-06-29 | pro monthly   | 19.90  |
 
-* Customer 1 - signed up to 7-day free trial on 01/08/2020. After that time, he/she didn't cancel the subsciption, so the system automatically upgraded it to basic monthly plan on 08/08/2020.
+* Customer 1 - signed up to 7-day free trial on 01/08/2020. After that time, he/she didn't cancel the subscription, so the system automatically upgraded it to basic monthly plan on 08/08/2020.
 
 * Customer 2 - signed up to 7-day free trial on 20/09/2020. After that time, he/she upgraded to pro annual plan on 27/09/2020.
 
 * Customer 11 -  signed up to 7-day free trial on 19/11/2020. After that time, he/she cancelled the subsciption on 26/11/2020.
 
-* Customer 13 - signed up to 7-day free trial on 15/12/2020. After that time, he/she didn't cancelled the subsciption, so the system automatically upgraded it to basic monthly plan on 22/12/2020. He/she continued using that plan for 2 months. On 29/03/2020 (still in the 3rd month using basic monthly plan), he/she upgraded to pro monthly plan.
+* Customer 13 - signed up to 7-day free trial on 15/12/2020. After that time, he/she didn't cancelled the subscription, so the system automatically upgraded it to basic monthly plan on 22/12/2020. He/she continued using that plan for 2 months. On 29/03/2020 (still in the 3rd month using basic monthly plan), he/she upgraded to pro monthly plan.
 
-* Customer 15 - signed up to 7-day free trial on 17/03/2020. After that time, he/she didn't cancel the subsciption, so the system automatically upgraded it basic monthly plan on 24/03/2020. He/she then cancelled that plan after 5 days (29/03/2020). He/she was able to use the basic monthly plan until 24/04/2020.
+* Customer 15 - signed up to 7-day free trial on 17/03/2020. After that time, he/she didn't cancel the subscription, so the system automatically upgraded it basic monthly plan on 24/03/2020. He/she then cancelled that plan after 5 days (29/03/2020). He/she was able to use the basic monthly plan until 24/04/2020.
 
-* Customer 16 - signed up to 7-day free trial on 31/05/2020. After that time, he/she didn't cancel the subsciption, so the system automatically upgraded it to basic monthly plan on 07/06/2020. He/she continued using that plan for 4 months. On 21/10/2020 (still in the 4th month using basic monthly plan), he/she upgraded to pro annual plan.
+* Customer 16 - signed up to 7-day free trial on 31/05/2020. After that time, he/she didn't cancel the subscription, so the system automatically upgraded it to basic monthly plan on 07/06/2020. He/she continued using that plan for 4 months. On 21/10/2020 (still in the 4th month using basic monthly plan), he/she upgraded to pro annual plan.
 
 * Customer 18 - signed up to 7-day free trial on 06/07/2020. After the trial time, he/she upgraded the subscription to pro monthly plan on 13/07/2020.
 
@@ -499,10 +500,10 @@ Create a payment table for the year 2020 that includes amounts paid by each cust
 
 
 Solution structure:
-* Using revursive cte to create a table that list out all the monthly payment shedule 2020
+* Using recursive cte to create a table that list out all the monthly payment schedule 2020
 * Use CASE statement to calculate the last date of their current plan.
-    * If the customer stay in the current plan until the end of 2020, the last date will be 2020-12-31.
-    * If the customer change the plan during the year, the last date will be last payment cycle date before he change to the next plan i.e the start_date + the month difference between the new plan start_date and the current plan start_date.
+    * If the customer stays in the current plan until the end of 2020, the last date will be 2020-12-31.
+    * If the customer changes the plan during the year, the last date will be last payment cycle date before he change to the next plan i.e the start_date + the month difference between the new plan start_date and the current plan start_date.
     * Annual plan is not applicable.
 * Select all the required columns to create a new table.
 
@@ -593,17 +594,17 @@ from mth_rev;
 Foodie Fi have acquired 1000 customers since the business started with c.80 new customers each month. Of the total 1000 customers, 307 customers has churned - churn rate 30.7%.  Data shows that after the trial, 55% of the customers upgrade to the basic monthly plan, 32.5% of the customers subscribed the pro monthly plan, 3.7% of the customers upgraded to the pro annual plan straightaway and 9.2% of the customers churned. It took averagely 105 days from trial to upgrade to a pro plan (paid premium plans). In 2021, there were 123 customers upgraded to a pro plan.  
 <br>
 
-To support the management team to monitor the business performance ongoingly, I would leverage the data insights to build a dahsboard that allows us to track the key metrics over time. Specifically, I would call out the following KPIs:
+To support the management team to monitor the business performance ongoingly, I would leverage the data insights to build a dashboard that allows us to track the key metrics over time. Specifically, I would call out the following KPIs:
 * **Monthly Revenue Growth** - how does the business grow their revenue monty-over-month.
 * **Total subscribers** - how many customers the business has in total at a point. This reflects the reach and popularity of Foodie Fi.
-* **The customer growth** - how customers increase month-over-month. THis reveals the momentum of the expansion of their customer base.
+* **The customer growth** - how customers increase month-over-month. This reveals the momentum of the expansion of their customer base.
 * **Conversion rate** - how many customers stay in Foodie Fi after the trial. Howe does the rate look like.
-* **Churn rate** - how many customers cancel their plan each month?  This signals customer dissatisfaction and can help pinpoint areas for improvements in suer expereince, pricing or content library etc.
+* **Churn rate** - how many customers cancel their plan each month?  This signals customer dissatisfaction and can help pinpoint areas for improvements in suer experience, pricing or content library etc.
 <br>
 
 # Growth/Next Steps <a name="growth-next-steps"></a>
-* **Improve the customer retention** - Further analysis on customers engagement for the customer cohort who upgrade their plan, those who downgrade from pro to basic plans, and those who cancel their subscriptions to yield additional insights on on how to improve customer retentions.
-* **Reduce the customer churn rate** - Leverage the data insights to design an exit survey to customers who wish to cancel thier subscriptions. This could help Foodie Fi to identify the common reasons for their cancellation and take measures to reduce the customer churn. We could monitor the churn rate and convertion rate to validate the effectiveness of those measures.
+* **Improve the customer retention** - Further analysis on customers engagement for the customer cohort who upgrade their plan, those who downgrade from pro to basic plans, and those who cancel their subscriptions to yield additional insights on how to improve customer retentions.
+* **Reduce the customer churn rate** - Leverage the data insights to design an exit survey to customers who wish to cancel their subscriptions. This could help Foodie Fi to identify the common reasons for their cancellation and take measures to reduce the customer churn. We could monitor the churn rate and conversion rate to validate the effectiveness of those measures.
   
 <br>
 
