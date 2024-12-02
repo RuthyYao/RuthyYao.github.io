@@ -96,7 +96,8 @@ We need to use the plan_id as the join key to join the two tables.
 # Exploratory Analysis  <a name="exploratory-analysis"></a>
 
 ## Customer Onboarding Journey 
-```TSQL
+
+```
 SELECT 
 	subscriptions.*,
 	plans.plan_name,
@@ -147,7 +148,8 @@ WHERE customer_id IN (1, 2, 11, 13, 15, 16, 18, 19);
 
 ## Data Analysis Questions
 ### 1. How many customers has Foodie-Fi ever had?
-```TSQL
+
+```
 SELECT COUNT(DISTINCT customer_id) AS total_customers
 FROM subscriptions;
 ```
@@ -158,7 +160,7 @@ FROM subscriptions;
 
 ---
 ### 2. What is the monthly distribution of trial plan start_date values for our dataset - use the start of the month as the group by value?
-```TSQL
+```
 SELECT 
     DATE_FORMAT(
 		DATE_ADD(
@@ -193,7 +195,8 @@ ORDER BY start_month;
 
 ---
 ### 3. What plan start_date values occur after the year 2020 for our dataset? Show the breakdown by count of events for each plan_name?
-```TSQL
+
+```
 SELECT 
 	subscriptions.plan_id,
     plans.plan_name,
@@ -215,8 +218,8 @@ ORDER BY subscriptions.plan_id;
 
 ---
 ### 4. What is the customer count and percentage of customers who have churned rounded to 1 decimal place?
-```SQL
 
+```
 -- Label each row with 1 or 0 based on the plan name (churn) and sum all the values with 1 divided by total
 SELECT
 	SUM(CASE WHEN plans.plan_name = 'churn' THEN 1 ELSE 0 END) AS churn_count,
@@ -233,7 +236,8 @@ LEFT JOIN plans
 
 ---
 ### 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
-```TSQL
+
+```
 WITH cte AS (
 	SELECT 
 		subscriptions.customer_id,
@@ -257,7 +261,8 @@ WHERE current_plan = 'trial' AND next_plan = 'churn';
 
 ---
 ### 6. What is the number and percentage of customer plans after their initial free trial?
-```TSQL
+
+```
 WITH cte AS (
 	SELECT 
 		subscriptions.customer_id,
@@ -286,7 +291,8 @@ GROUP BY next_plan;
 
 ---
 ### 7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
-```TSQL
+
+```
 WITH cte AS (	
     SELECT 
 		subscriptions.customer_id,
@@ -319,7 +325,8 @@ ORDER BY plan_id;
 
 ---
 ### 8. How many customers have upgraded to an annual plan in 2020?
-```TSQL
+
+```
 SELECT 
   plans.plan_name,
   COUNT(DISTINCT customer_id) AS customer_count
@@ -335,7 +342,8 @@ WHERE plans.plan_name = 'pro annual'
 
 ---
 ### 9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
-```TSQL
+
+```
 WITH AnnualPlan AS (
 SELECT
 	subscriptions.customer_id,
@@ -374,7 +382,7 @@ Solution structure:
 * Create a recursive CTE named ```days_bucket``` to generate 30-days periods (i.e. 0-30 days, 31-60 days etc)
 * Left join from ```days_bucket``` with ```DayDiff``` 
     
-```TSQL
+```
 WITH RECURSIVE 
 AnnualPlan AS (
 SELECT
@@ -442,7 +450,8 @@ ORDER BY days_bucket.lower_lmt, days_bucket.upper_lmt;
 
 ---
 ### 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
-```TSQL
+
+```
 WITH cte AS(
 SELECT
 	customer_id,
@@ -465,6 +474,7 @@ GROUP BY current_plan;
 
 
 There were no customers downgrading from a pro monthly to a basic monthly plan in 2020.
+
 ---
 ### Challenge Question: 
 Create a payment table for the year 2020 that includes amounts paid by each customer in the subscriptions table with the following requirements:
@@ -507,7 +517,7 @@ Solution structure:
     * Annual plan is not applicable.
 * Select all the required columns to create a new table.
 
-```TSQL
+```
 CREATE TABLE payment
 WITH RECURSIVE payment_schedule AS (
 SELECT
@@ -559,7 +569,8 @@ WHERE amount IS NOT NULL  -- exclude churns
 ORDER BY customer_id;
 ```
 ### Outside of the Box Question: How would you calculate the rate of growth for Foodie-Fi?
-```TSQL
+
+```
 WITH mth_rev AS(
 SELECT 
 	MONTH(payment_date) AS month,
