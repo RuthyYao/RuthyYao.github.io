@@ -344,7 +344,7 @@ That code results in the following table...
 <br>
 For *Cluster 1* we see a reasonably significant portion of spend being allocated to each of the product areas.  For *Cluster 2* we see quite high proportions of spend being allocated to Fruit & Vegetables, but very little to the Dairy & Meat product areas.  It could be hypothesised that these customers are following a vegetarian diet.  Finally customers in *Cluster 3* spend, on average, significant portions within Dairy, Fruit & Vegetables, but very little in the Meat product area - so similarly, we would make an early hypothesis that these customers are more along the lines of those following a Lacto-vegetarian diet - very interesting!
 
-Now let's aggregate the customer data based on the cluster they belong so we can derive a typical visit, shopping basket and annual spend profile for each cluster.
+Now let's aggregate the customer data based on the cluster they belong to so we can derive a typical visit, shopping basket and annual spend profile for each cluster.
 
 ```python
 
