@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The "You Are What You Eat" Customer Segmentation
-image: "/posts/clustering-title-img.png"
+image: "/you-are-what-you-eat/clustering-title-img.png"
 tags: [Customer Segmentation, Machine Learning, Clustering, Python]
 ---
 
@@ -31,9 +31,7 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-The Senior Management team from our client, a supermarket chain, are disagreeing about how customers are shopping, and how lifestyle choices may affect which food areas customers are shopping into, or more interestingly, not shopping into.
-
-They have asked us to use data, and Machine Learning to help segment up their customers based upon their engagement with each of the major food categories - aiding business understanding of the customer base, and to enhance the relevancy of targeted messaging & customer communications.
+ABC grocery store's transactions data shows that their customers have a fair bit of spread of spending across different product areas. The management team would like to know whether the difference is just due to the size of their households or is driven by their lifestyle. The management team asked the data analytics team to dig into the data to see if there is any distinct clusters of their customer base. If so, we can rely on these insights to customize our communication on product recommendation and promotions and also optimize our inventory.
 
 <br>
 <br>
@@ -55,11 +53,11 @@ Based upon iterative testing using WCSS we settled on a customer segmentation wi
 
 There were some extremely interesting findings from profiling the clusters.
 
-For *Cluster 0* we saw a significant portion of spend being allocated to each of the product areas - showing customers without any particular dietary preference.  
+For *Cluster 1* we saw a significant portion of spend being allocated to each of the product areas - showing customers without any particular dietary preference.  
 
-For *Cluster 1* we saw quite high proportions of spend being allocated to Fruit & Vegetables, but very little to the Dairy & Meat product areas.  It could be hypothesised that these customers are following a vegan diet.  
+For *Cluster 2* we saw quite high proportions of spend being allocated to Fruit & Vegetables, but very little to the Dairy & Meat product areas.  It could be hypothesised that these customers are following a vegetarian diet.  
 
-Finally customers in *Cluster 2* spent significant portions within Dairy, Fruit & Vegetables, but very little in the Meat product area - so similarly, we would make an early hypothesis that these customers are more along the lines of those following a vegetarian diet.
+Finally customers in *Cluster 3* spent significant portions within Dairy, Fruit & Vegetables, but very little in the Meat product area - so similarly, we would make an early hypothesis that these customers are more along the lines of those following a Lacto-vegetarian diet.
 
 To help embed this segmentation into the business, we have proposed to call this the "You Are What You Eat" segmentation.
 
@@ -67,11 +65,9 @@ To help embed this segmentation into the business, we have proposed to call this
 <br>
 ### Growth/Next Steps <a name="overview-growth"></a>
 
-It would be interesting to run this clustering/segmentation at a lower level of product areas, so rather than just the four areas of Meat, Dairy, Fruit, Vegetables - clustering spend across the sub-categories *below* those categories.  This would mean we could create more specific clusters, and get an even more granular understanding of dietary preferences within the customer base.
+* **Run the analysis on sub-categories to gain more granular understanding of the dietary preference** -  It would be interesting to run this clustering / segmentation at a lower level of product areas, so rather than just the four areas of Meet, Diary, Fruit and Vegetables, clustering spend across the sub-categories. This would mean we could create more specific clusters, and get an even more granular understanding of dietary preferences within the customer base.
 
-Here we've just focused on variables that are linked directly to sales - it could be interesting to also include customer metrics such as distance to store, gender etc to give a even more well-rounded customer segmentation.
-
-It would be useful to test other clustering approaches such as hierarchical clustering or DBSCAN to compare the results.
+* **Include other customer metrics to gain a more well-rounded customer segmentation** - Here we've just focused on variables that are linked directly to sales - it could be interesting to also include customer metrics such as income, house hold size, gender etc to give a even more well-rounded customer segmentation. 
 <br>
 <br>
 
@@ -263,7 +259,7 @@ plt.show()
 That code gives us the below plot - which visualises our results!
 
 <br>
-![alt text](/img/posts/WCSS_by_k.png "K-Means Optimal k Value Plot")
+![alt text](/img/you-are-what-you-eat/WCSS_by_k.png "K-Means Optimal k Value Plot")
 
 <br>
 Based upon the shape of the above plot - there does appear to be an elbow at k = 3.  Prior to that we see a significant drop in the WCSS score, but following the decreases are much smaller, meaning this could be a point that suggests adding *more clusters* will provide little extra benefit in terms of separating our data.  A small number of clusters can be beneficial when considering how easy it is for the business to focus on, and understand, each - so we will continue on, and fit our k-means clustering solution with k = 3.
@@ -318,11 +314,11 @@ data_for_clustering["cluster"].value_counts(normalize=True)
 
 Running that code shows us that the three clusters are different in size, with the following proportions:
 
-* Cluster 0: **73.6%** of customers
+* Cluster 1: **73.6%** of customers
 * Cluster 2: **14.6%** of customers
-* Cluster 1: **11.8%** of customers
+* Cluster 3: **11.8%** of customers
 
-Based on these results, it does appear we do have a skew toward Cluster 0 with Cluster 1 & Cluster 2 being proportionally smaller.  This isn't right or wrong, it is simply showing up pockets of the customer base that are exhibiting different behaviours - and this is *exactly* what we want.
+Based on these results, it does appear we do have a skew toward Cluster 1 with Cluster 2 & Cluster 3 being proportionally smaller.  This isn't right or wrong, it is simply showing up pockets of the customer base that are exhibiting different behaviours - and this is *exactly* what we want.
 
 <br>
 ##### Cluster Attributes
@@ -341,12 +337,43 @@ That code results in the following table...
 
 | **Cluster** | **Dairy** | **Fruit** | **Meat** | **Vegetables** |
 |---|---|---|---|---|
-| 0 | 22.1% | 26.5% | 37.7% | 13.8%  |
-| 1 | 0.2% | 63.8% | 0.4% | 35.6%  |
-| 2 | 36.4% | 39.4% | 2.9% | 21.3%  |
+| 1 | 22.1% | 26.5% | 37.7% | 13.8%  |
+| 2 | 0.2% | 63.8% | 0.4% | 35.6%  |
+| 3 | 36.4% | 39.4% | 2.9% | 21.3%  |
 
 <br>
-For *Cluster 0* we see a reasonably significant portion of spend being allocated to each of the product areas.  For *Cluster 1* we see quite high proportions of spend being allocated to Fruit & Vegetables, but very little to the Dairy & Meat product areas.  It could be hypothesised that these customers are following a vegan diet.  Finally customers in *Cluster 2* spend, on average, significant portions within Dairy, Fruit & Vegetables, but very little in the Meat product area - so similarly, we would make an early hypothesis that these customers are more along the lines of those following a vegetarian diet - very interesting!
+For *Cluster 1* we see a reasonably significant portion of spend being allocated to each of the product areas.  For *Cluster 2* we see quite high proportions of spend being allocated to Fruit & Vegetables, but very little to the Dairy & Meat product areas.  It could be hypothesised that these customers are following a vegetarian diet.  Finally customers in *Cluster 3* spend, on average, significant portions within Dairy, Fruit & Vegetables, but very little in the Meat product area - so similarly, we would make an early hypothesis that these customers are more along the lines of those following a Lacto-vegetarian diet - very interesting!
+
+Now let's aggregate the customer data based on the cluster they belong so we can derive a typical visit, shopping basket and annual spend profile for each cluster.
+
+```python
+
+transactions_count = transactions.groupby(['customer_id'])['transaction_id'].count().reset_index()
+sales = transactions.groupby(['customer_id'])['sales_cost'].sum().reset_index()
+customers = pd.merge(data_for_clustering,transactions_count, on = 'customer_id', how = 'inner')
+customers = pd.merge(customers,sales, on = 'customer_id', how = 'inner')
+clusters_transaction_sales = customers.groupby('cluster')[['transaction_id', 'sales_cost']].mean()
+
+# Calculate the average shopping basket
+clusters_transaction_sales['basket'] = clusters_transaction_sales['sales_cost']/clusters_transaction_sales['transaction_id']
+
+# The data set has half-year's data, Let's caculate the monthly visits and the annual spend.
+clusters_transaction_sales['transaction_id'] = clusters_transaction_sales['transaction_id'] / 6
+clusters_transaction_sales['sales_cost'] = 2 *clusters_transaction_sales['sales_cost']
+
+clusters_transaction_sales.rename(columns ={'transaction_id':'visit_count','sales_cost':'Annual_spend'} )
+
+```
+
+The code will result in the following table
+
+| **cluster** | **visit_count** | **Annual_spend** | **basket** |
+|------------:|----------------:|-----------------:|------------|
+|           1 |        6.212500 |      1982.184625 |  26.588660 |
+|           2 |        4.446602 |      1402.195534 |  26.278410 |
+|           3 |        5.404199 |      1513.168819 |  23.333225 |
+
+We can see that Cluster 1 customers have the most frequent visits to the store hence the largest annual spends. Whereas Cluster 2 customer visit less than the other two groups. Cluster 3 customers' average spend per visit is smaller than the other two groups.
 
 ___
 <br>
@@ -358,12 +385,12 @@ Tracking these clusters over time would allow the client to more quickly react t
 
 Based upon these clusters, the client will be able to target customers more accurately - promoting products & discounts to customers that are truly relevant to them - overall enabling a more customer focused communication strategy.
 
+The visits and shopping basket analysis indicates that there is opportunity to increase the visit frequency from the cluster 2 "Vegetarian Shoppers". For example, ABC Grocery could send more seasonal promotions to attract more store visits. There is also opportunity to expand the shopping basket in cluster 3 "Lacto- vegetarian" shoppers. For instance, ABC could consider increasing the range of the products for these categories, so customers have more product choices for them to add to their basket.
+
 ___
 <br>
 # Growth & Next Steps <a name="growth-next-steps"></a>
 
-It would be interesting to run this clustering/segmentation at a lower level of product areas, so rather than just the four areas of Meat, Dairy, Fruit, Vegetables - clustering spend across the sub-categories *below* those categories.  This would mean we could create more specific clusters, and get an even more granular understanding of dietary preferences within the customer base.
+* **Run the analysis on sub-categories to gain more granular understanding of the dietary preference** -  It would be interesting to run this clustering / segmentation at a lower level of product areas, so rather than just the four areas of Meet, Diary, Fruit and Vegetables, clustering spend across the sub-categories. This would mean we could create more specific clusters, and get an even more granular understanding of dietary preferences within the customer base.
 
-Here we've just focused on variables that are linked directly to sales - it could be interesting to also include customer metrics such as distance to store, gender etc to give a even more well-rounded customer segmentation.
-
-It would be useful to test other clustering approaches such as hierarchical clustering or DBSCAN to compare the results.
+* **Include other customer metrics to gain a more well-rounded customer segmentation** - Here we've just focused on variables that are linked directly to sales - it could be interesting to also include customer metrics such as income, house hold size, gender etc to give a even more well-rounded customer segmentation. 
