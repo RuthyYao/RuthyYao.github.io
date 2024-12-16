@@ -72,7 +72,7 @@ Finally, we should leverage this opportunity to accelerate new customer acquisit
 ### Growth/Next Steps <a name="overview-growth"></a>
 
 We could run the same analysis for an extended period, such as in six months and in a year to inspect whether our sales rebound - the magnitude and the speed. This could also help us to measure the effectiveness of our prescribed actions above.
-___
+<br>
 
 To see details of the analysis and [my SQL syntax solutions](https://github.com/RuthyYao/8-Weeks-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart)
 
