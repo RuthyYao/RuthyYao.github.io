@@ -16,7 +16,6 @@ Clique Bait, an online seafood shop wants to gain detailed insights into their s
     - [Insights & Recommendations](#overview-insights-recommendations)
     - [Growth/Next Steps](#overview-growth)
 
----
 
 # Project Overview  <a name="overview-main"></a>
 
