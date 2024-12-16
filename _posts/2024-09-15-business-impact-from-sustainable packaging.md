@@ -67,15 +67,15 @@ We need to proactively manage the transition to the sustainable packaging to min
 
 Particularly, in the most negatively impacted regions, we coul slow down the pace of introducing the new packages. For example, we could offer th the types of packages at the same time for an extended period to help customers transition to the new packages.
 
-When it comes to the platform, as Retail comprised of 97% of our total sales, even a slightly decrease in retail sales will drap the total company's sales performance down. Hence, we need to put in much more efforts to the retail channel to manage the sales impact. For instance, we could gave customers more support in the transition period such as giving our the re-usable bagas for free. This 
+When it comes to the platform, as Retail comprised of 97% of our total sales, even a slightly decrease in retail sales will drap the total company's sales performance down. Hence, we need to put in much more efforts to the retail channel to manage the sales impact. For instance, we could gave customers more support in the transition period such as giving out the re-usable bagas for free to help customers adapt to the change.
+
+Furthermore, as we see middle aged customers and families got the largest hit in sales, we could consider implementing some educational programs drive more the public awareness on why to make the change on packaging and to win their support.  
+
+Finally, we should leverage this opportunity to accelerate new customer acquistion and drive more sales from nw customers, particularly in our Shopify platform. For example, we could run some brand marketing activities to strengthen our sustainable brand, increasing the coverage to maximize the reach to customers. 
 
 ### Growth/Next Steps <a name="overview-growth"></a>
 
-* To drive the conversion rate up, we could test different promotional strategies and track the change of the product funnel conversion and fallout rate. 
-
-* We could also collect external data to establish a benchmark for the key metrics to help us better gauge our performance. 
-
-* Further analysis on customers visits and shopping basket to segment the customers and develop more customized campaigns and promotions.
+We could run the same analysis for an extended period, such as in six months and in a year to inspect whether our sales rebound - the magtitude and the speed. This could also help us to measure the effectiveness of our prescribed actions above.
 
 # Data Understanding  <a name="data-understanding"></a>
 
@@ -84,3 +84,8 @@ Entity Relationship Diagram:
 <img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/data-mart/case-study-5-erd.png">
 
 <br>
+___
+
+To see details of the analysis and my [SQL syntax solutions], please refer to my Github repository(https://github.com/RuthyYao/8-Weeks-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart)
+<br>
+Note: This project comes from [#8WeekSQLChallenge-CaseStudy#5](https://8weeksqlchallenge.com/case-study-5/)
