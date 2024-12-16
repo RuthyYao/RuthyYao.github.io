@@ -74,5 +74,5 @@ ___
 To see details of the analysis and my [SQL syntax solutions](https://github.com/RuthyYao/8-Weeks-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart)
 
 <br>
----
+
 Note: This project comes from [#8WeekSQLChallenge-CaseStudy#5](https://8weeksqlchallenge.com/case-study-5/)
