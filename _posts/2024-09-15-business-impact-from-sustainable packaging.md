@@ -17,9 +17,9 @@ Clique Bait, an online seafood shop wants to gain detailed insights into their s
     - [Growth/Next Steps](#overview-growth)
 - [01. Data Understanding](#data-understanding)
 - [02. Data Analysis](#Data-analysis)
-    - [Digital Analysis](#digital-analysis)
-    - [Product Funnel](#product-funnel)
-    - [Campaign Analysis](#campaign-analysis)
+    - [Data Cleaning](#data-cleaning)
+    - [Data Exploration](#data-exploration)
+    - [Event Analysis](#event-analysis)
 - [03. Insights & Recommendations](#insights-recommendations)
 - [04. Growth & Next Steps](#growth-next-steps)
 
@@ -77,6 +77,8 @@ Finally, we should leverage this opportunity to accelerate new customer acquisti
 
 We could run the same analysis for an extended period, such as in six months and in a year to inspect whether our sales rebound - the magtitude and the speed. This could also help us to measure the effectiveness of our prescribed actions above.
 
+___
+
 # Data Understanding  <a name="data-understanding"></a>
 
 Entity Relationship Diagram:
@@ -84,8 +86,15 @@ Entity Relationship Diagram:
 <img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/data-mart/case-study-5-erd.png">
 
 <br>
+
+# Data Analysis  <a name="data-analysis"></a>
+
+## Part 1 - Data Cleaning <a name="data-cleaning"></a>
+
+### 1. Calculate total number of customers.
 ___
 
-To see details of the analysis and my [SQL syntax solutions], please refer to my Github repository(https://github.com/RuthyYao/8-Weeks-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart)
+To see details of the analysis and my [SQL syntax solutions](https://github.com/RuthyYao/8-Weeks-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart)
 <br>
+---
 Note: This project comes from [#8WeekSQLChallenge-CaseStudy#5](https://8weeksqlchallenge.com/case-study-5/)
