@@ -77,7 +77,7 @@ Running more A/B Tests like this, gathering more data, and then re-running this 
 
 <br>
 <br>
-***
+___
 # Data Overview & Preparation  <a name="data-overview"></a>
 
 In the client database, we have a *campaign_data* table which shows us which customers received each type of "Delivery Club" mailer, which customers were in the control group, and which customers joined the club as a result.
