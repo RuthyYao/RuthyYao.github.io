@@ -75,8 +75,7 @@ Entity Relationship Diagram:
 <img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/clique-bait/case-study-6-erd.PNG">
 
 <br>
-![alt text](/img/clique-bait/case-study-6-erd.PNG "Entity Relationship Diagram")
-<br>
+
 
 The original dataset has five data tables. The primary data table is "events" which is the raw data of the customer visits. It stores the visits id, the visit time, the page visited and the activities on the page. 
 
