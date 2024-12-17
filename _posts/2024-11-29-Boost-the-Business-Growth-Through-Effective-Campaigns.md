@@ -70,9 +70,6 @@ The analysis shows that Oyster and Crab are the most purchased products. The man
 
 # Data Understanding  <a name="data-understanding"></a>
 
-Entity Relationship Diagram:
-
-<img src="https://github.com/RuthyYao/RuthyYao.github.io/blob/master/img/clique-bait/case-study-6-erd.PNG">
 
 <br>
 ![alt text](/img/clique-bait/case-study-6-erd.PNG "Entity Relationship Diagram")
