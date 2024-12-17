@@ -138,6 +138,7 @@ LEFT JOIN event_Identifier AS ei
 	ON e.event_type = ei.event_type
 GROUP BY e.event_type, ei.event_name;
 ```
+
 | event_type | event_name    | event_count |
 |------------|---------------|-------------|
 | 1          | Page View     | 3564        |
