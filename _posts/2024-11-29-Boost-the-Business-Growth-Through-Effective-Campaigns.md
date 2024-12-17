@@ -28,7 +28,7 @@ ___
 # Project Overview  <a name="overview-main"></a>
 
 ### Business Problem <a name="overview-business-problem"></a>
-Clique Bait has established the e-commerce channel five months ago. The management team wants to establish a view on the online store performance and identify the areas for improvement so they achieve faster business growth. 
+Clique Bait, an online seafood shop established the e-commerce five months ago. The management team wants to review the online store performance and gain some insights on how customers interact with the website from page visits to make a purchase. They also want to check whether the campaigns drove more sales and conversion and get some guidance on how to make the campaigns more effective in future.
 
 ### Actions <a name="overview-actions"></a>
 I first compiled the necessary data from five datasets that provided the customer data, page visits and campaigns information.
