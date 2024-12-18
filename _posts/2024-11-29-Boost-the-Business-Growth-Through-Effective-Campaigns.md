@@ -46,7 +46,7 @@ Clique Bait has acquired 500 customers over the last four to five months. On ave
 
 The most purchased product is lobster which also has the highest view-to-purchase conversion rate. The top 3 visited pages are Oyster, Crab followed by Russian Caviar. Ironically, Russian Caviar is also the most likely to be abandoned product (add to cart but not purchased) with an abandoned rate of 26%. 
 
-Campaigns uplifted page views and attract more purchases from customers. From January to March, Clique Bait run three campaigns, resulting in page view reaching above 800 marks. In contrast, during April and May when there aren’t any campaigns, the page visits dropped to 200. Comparing the customers who received the campaign ad impression with those who didn't receive the impressions, we see page views per visit uplifted by 3 (8.6 vs 5.5) and purchase rate dramatically increased by 58% (89% vs 27%), which proved that campaigns did effectively drive the sales. 
+Campaigns uplifted page views and attract more purchases from customers. From January to March, Clique Bait run three campaigns, resulting in page view reaching above 800 marks. In contrast, during April and May when there aren’t any campaigns, the page visits dropped to 200. Comparing the customers who received the campaign ad impression with those who didn't receive the impressions, we see page views per visit uplifted by 4.6 (8.6 vs 4.0) and purchase rate dramatically increased by 58% (89% vs 27%), which proved that campaigns did effectively drive the sales. 
 
 Of the three campaigns, "half-price" promotion achieves the highest impression-to-purchase conversion rate - 85.3% followed by "Buy-one-get-one-free" achieved 84.6%. 
 
@@ -875,8 +875,8 @@ WHERE campaign_name IS NOT NULL
 The performance metrics for this customer group.
 
 ```
-SET @not_received_users = 56;
-SET @not_received_visits = 268;
+SET @not_received_users = 78;
+SET @not_received_visits = 368;
 
 SELECT 
     SUM(page_views) / @not_received_users AS page_views_per_user,
@@ -897,7 +897,7 @@ WHERE campaign_name IS NOT NULL
 
 | page_views_per_user | page_views_per_visit | cart_adds | purchase_rate |
 |---------------------|----------------------|-----------|---------------|
-| 26.4821             | 5.5336               | 1.1848    | 27.2          |
+| 19.0128             | 4.0299               | 1.1848    | 27.2          |
 
 
 Now put all the four customer groups together.
@@ -908,10 +908,10 @@ Now put all the four customer groups together.
 | Received impressions                   | 417            | 747        | 15.3213                 | 8.5529                   | 5.0482        | 85                  |
 | Received impressions and clicked       | 367            | 599        | 14.8038                 | 9.0701                   | 5.7162        | 89.6                |
 | Received impressions but didn't  click | 50             | 61         | 7.62                    | 6.2459                   | 2.2295        | 65.6                |
-| Didn't receive impressions             | 56             | 268        | 26.4821                 | 5.5336                   | 1.1848        | 27.2                |
+| Didn't receive impressions             | 78             | 368        | 19.0128                 | 4.0299                   | 1.1848        | 27.2                |
 
 
-Customers who received the promotions visited more pages in each visit than customers who didn't receive the promotion (8.6 vs 5.5 page views per visit). Customers who received the promotion also purchase more than those who didn't receive the ad (average 5 cart-add vs 1.2). The purchase conversion rate is substantially higher (85% vs 27.2%). 
+Customers who received the promotions visited more pages in each visit than customers who didn't receive the promotion (8.6 vs 4.0 page views per visit). Customers who received the promotion also purchase more than those who didn't receive the ad (average 5 cart-add vs 1.2). The purchase conversion rate is substantially higher (85% vs 27.2%). 
 
 Those who click the ad displayed higher page views, cart-add and purchases than those who didn't click the ad. Also note 88% of the users who received the promotion clicked the promotion ad with only 12% didn't click. This also shows that promotions did draw the attention of the customers. 
 
