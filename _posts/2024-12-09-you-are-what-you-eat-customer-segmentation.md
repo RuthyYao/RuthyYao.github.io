@@ -31,7 +31,7 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-ABC grocery store's transactions data shows that their customers have a fair bit of spread of spending across different product areas. The management team would like to know whether the difference is just due to the size of their households or is driven by their lifestyle. The management team asked the data analytics team to dig into the data to see if there is any distinct clusters of their customer base. If so, we can rely on these insights to customize our communication on product recommendation and promotions and also optimize our inventory.
+ABC grocery store's transactions data shows that their customers have a fair bit of spread of spending across different product areas. The management team would like to know whether the difference is just due to the size of their households or is driven by their lifestyle. The management team asked the data analytics team to dig into the data to see if there is any distinct clusters of their customer base. If we could segement our customers into different clusters, it will help our marketing team to customize our product recommendations and promotions, producing more relevant content and communications to each customer.
 
 <br>
 <br>
