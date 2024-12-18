@@ -262,7 +262,7 @@ That code gives us the below plot - which visualises our results!
 ![alt text](/img/you-are-what-you-eat/WCSS_by_k.png "K-Means Optimal k Value Plot")
 
 <br>
-Based upon the shape of the above plot - there does appear to be an elbow at k = 3.  Prior to that we see a significant drop in the WCSS score, but following the decreases are much smaller, meaning this could be a point that suggests adding *more clusters* will provide little extra benefit in terms of separating our data.  A small number of clusters can be beneficial when considering how easy it is for the business to focus on, and understand, each - so we will continue on, and fit our k-means clustering solution with k = 3.
+Based upon the shape of the above plot - there does appear to be an elbow at k = 3.  Prior to that we see a significant drop in the WCSS score, but following the decreases are much smaller, meaning this could be a point that suggests adding *more clusters* will provide little extra benefit in terms of separating our data.  A small number of clusters can be beneficial when considering how easy it is for the business to focus on and understand - so we will continue on, and fit our k-means clustering solution with k = 3.
 
 <br>
 ### Model Fitting <a name="kmeans-model-fitting"></a>
