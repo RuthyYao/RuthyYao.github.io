@@ -2,7 +2,7 @@
 layout: post
 title: Boost the Business Growth Through Effective Campaigns
 image: "/clique-bait/6.png"
-tags: [digital analysis, product funnel, campaign analysis, SQL]
+tags: [digital analysis, product funnel, campaign analysis, SQL, PowerBI]
 ---
 
 Clique Bait, an online seafood shop wants to gain detailed insights into their store and customers. In particular, the management team would like to track their customer journeys and optimize marketing strategies.
