@@ -20,8 +20,9 @@ Clique Bait, an online seafood shop wants to gain detailed insights into their s
     - [Digital Analysis](#digital-analysis)
     - [Product Funnel](#product-funnel)
     - [Campaign Analysis](#campaign-analysis)
-- [03. Insights & Recommendations](#insights-recommendations)
-- [04. Growth & Next Steps](#growth-next-steps)
+- [03. Data Communication](#data-communication)
+- [04. Insights & Recommendations](#insights-recommendations)
+- [05. Growth & Next Steps](#growth-next-steps)
 
 ___
 
@@ -955,6 +956,13 @@ LEFT JOIN campaign_purchase_rate
 * BOGOF had the highest click rate. The purchase rate is also very impressive. Clique Bait could consider run this campaign in a larger scale in future.
 * 25% Off campaign has the lowest click rate among the three campaigns. However, the purchase rate is not too far off compared with the other two campaigns. 
 
+# Data Communication  <a name="data-communication"></a>
+
+I designed a dashboard to help communicate the data insights to the management team. 
+
+<br>
+![alt text](/img/clique-bait/6-Dashboard.PNG "Entity Relationship Diagram")
+<br>
 
 # Insights & Recommendations  <a name="insights-recommendations"></a>
 To boost the sales growth, the management team should focus on managing the conversion rate, particularly the conversion from page view to add-to-cart and from add-to-cart to finally making the purchase. In this aspect, the management should keep an eye on the customers who visit the checkout page but didn't make purchases. It is recommended that we collect further information to understand what caused the customers abandoned the checkout. 
