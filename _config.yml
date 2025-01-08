@@ -9,7 +9,7 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: Ruthy Yao
-description: "Hi I'm Ruthy, and I'm a Data Analyst.  My portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact. Please visit my Github & LinkedIn pages (or download my Resume) by using the links below!"
+description: "Hi I'm Ruthy, and I'm passionate about translating data into business insights.  Here is my self-learned portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact. Please visit my Github & LinkedIn pages (or download my Resume) by using the links below!"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
