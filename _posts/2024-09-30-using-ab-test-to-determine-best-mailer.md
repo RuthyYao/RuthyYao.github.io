@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Using A/B Test to Determine the Best Mailer Type
+title: Using A/B Test to Choose the Mailer Type
 image: "/posts/ab-testing-title-img.png"
 tags: [AB Testing, Hypothesis Testing, Chi-Square, Python]
 ---
